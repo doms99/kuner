@@ -1,0 +1,59 @@
+name: kuner
+description: Wear OS app for quick conversion from HRK to EUR and vice versa
+
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.17.6 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  cupertino_icons: ^1.0.2
+  flutter_gen: ^4.3.0
+  wear: ^1.1.0
+  flutter_svg: ^1.1.5
+  get_it: ^7.2.0
+  shared_preferences_android: ^2.0.13
+  bloc: ^8.1.0
+  freezed_annotation: ^2.1.0
+  flutter_bloc: ^8.1.1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  flutter_lints: ^2.0.0
+  build_runner: ^2.2.1
+  flutter_gen_runner: ^4.3.0
+  freezed: ^2.1.0+1
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/pngs/
+    - assets/svgs/
+
+  fonts:
+    - family: Josefin-Sans
+      fonts:
+        - asset: assets/fonts/josefin_sans_regular.ttf
+          weight: 400
+        - asset: assets/fonts/josefin_sans_medium.ttf
+          weight: 500
+        - asset: assets/fonts/josefin_sans_bold.ttf
+          weight: 700
+    - family: Outfit
+      fonts:
+        - asset: assets/fonts/outfit_regular.ttf
+          weight: 400
+        - asset: assets/fonts/outfit_medium.ttf
+          weight: 500
+        - asset: assets/fonts/outfit_bold.ttf
+          weight: 700
+
+flutter_gen:
+  output: lib/gen/
+  line_length: 120

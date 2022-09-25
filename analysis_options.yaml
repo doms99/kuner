@@ -1,0 +1,71 @@
+include: package:flutter_lints/flutter.yaml
+
+analyzer:
+  plugins:
+    - dart_code_metrics
+
+  strong-mode:
+    implicit-casts: false
+    implicit-dynamic: false
+  exclude:
+    - "lib/**/*.g.dart"
+    - "lib/**/*.freezed.dart"
+    - "lib/**/*.gen.dart"
+    - "lib/*.gen.dart"
+
+linter:
+  rules:
+    - prefer_single_quotes
+
+
+dart_code_metrics:
+  anti-patterns:
+    - long-method:
+        exclude:
+          - "test/**"
+    - long-parameter-list:
+        exclude:
+          - "test/**"
+  metrics:
+    cyclomatic-complexity: 20
+    maximum-nesting-level: 5
+    number-of-methods: 10
+    number-of-parameters: 10
+    technical-debt:
+      threshold: 0
+      todo-cost: 4
+      ignore-cost: 4
+      ignore-for-file-cost: 8
+      as-dynamic-cost: 4
+      deprecated-annotations-cost: 2
+      file-nullsafety-migration-cost: 4
+      unit-type: "Hours"
+  rules:
+    - avoid-collection-methods-with-unrelated-types
+    - avoid-global-state
+    - avoid-nested-conditional-expressions
+    - avoid-unnecessary-type-assertions
+    - avoid-unnecessary-type-casts
+    - avoid-unused-parameters
+    - ban-name:
+        entries:
+          # Use loggy. Don't use print
+          - ident: print
+            description: Use Loggy for printing statements to the console in this project.
+    - no-boolean-literal-compare
+    - no-empty-block
+    - no-equal-then-else
+    - prefer-immediate-return
+    - prefer-match-file-name:
+        severity: style
+    # Flutter
+    - always-remove-listener
+    - avoid-returning-widgets
+    - prefer-extracting-callbacks
+    - prefer-single-widget-per-file:
+        ignore-private-widgets: true
+
+  exclude-metrics:
+    - "test/**"
+  exclude-rules:
+    - "test/**"

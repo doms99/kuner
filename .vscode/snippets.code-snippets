@@ -1,0 +1,20 @@
+{
+  "Assets": {
+    "scope": "dart",
+    "body": "import 'package:kuner/gen/assets.gen.dart';",
+    "description": "Assets gen file",
+    "prefix": "iassets"
+  },
+  "Fonts": {
+    "scope": "dart",
+    "body": "import 'package:kuner/gen/fonts.gen.dart';",
+    "description": "Fonts gen file",
+    "prefix": "ifonts"
+  },
+  "Number theme": {
+    "scope": "dart",
+    "body": "import 'package:kuner/ui/common/theme/number_theme.dart';",
+    "description": "Number theme extensions",
+    "prefix": "inumtheme"
+  }
+}
