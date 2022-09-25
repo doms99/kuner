@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:kuner/ui/common/components/conversion_input.dart';
 import 'package:kuner/ui/common/components/conversion_output.dart';
 import 'package:kuner/ui/common/components/kuner_conversion_toggle.dart';
-import 'package:kuner/ui/common/components/models/currency.dart';
-import 'package:kuner/ui/common/components/page_indicator.dart';
 import 'package:kuner/ui/conversion/presenter/conversion_screen_action.dart';
 import 'package:kuner/ui/conversion/presenter/conversion_screen_presenter.dart';
 import 'package:kuner/ui/conversion/presenter/conversion_screen_presenter_widget.dart';
@@ -70,15 +68,7 @@ class _ConversionScreen extends StatelessWidget {
               ],
             ),
           ),
-          const SizedBox(
-            height: 34,
-            child: Center(
-              child: PageIndicator(
-                count: 3,
-                selected: 0,
-              ),
-            ),
-          ),
+          const SizedBox(height: 34),
         ],
       ),
     );

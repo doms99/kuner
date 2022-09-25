@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kuner/ui/common/theme/theme.dart';
-import 'package:kuner/ui/options/options_screen.dart';
+import 'package:kuner/ui/paged/paged_screen.dart';
 
 class KunerApp extends StatelessWidget {
   const KunerApp({super.key});
@@ -15,7 +15,7 @@ class KunerApp extends StatelessWidget {
 
         return ConstrainedBox(
           constraints: BoxConstraints.tight(size),
-          child: const OptionsScreen(),
+          child: const PagedScreen(),
         );
       }),
     );

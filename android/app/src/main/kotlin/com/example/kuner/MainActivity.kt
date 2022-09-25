@@ -2,17 +2,18 @@ package com.example.kuner
 
 import android.content.Context
 import android.os.Bundle
-import android.os.VibrationEffect
+import android.os.PersistableBundle
 import android.os.Vibrator
 import android.view.InputDevice
 import android.view.MotionEvent
-import android.view.ViewConfiguration
+import android.view.View
 import androidx.core.view.MotionEventCompat
-import androidx.core.view.ViewConfigurationCompat
+import androidx.viewpager.widget.ViewPager
+import androidx.wear.widget.SwipeDismissFrameLayout
 import io.flutter.embedding.android.FlutterActivity
 import io.flutter.embedding.engine.FlutterEngine
 import io.flutter.plugin.common.EventChannel
-import io.flutter.plugin.common.MethodChannel
+import java.lang.Exception
 
 class MainActivity: FlutterActivity() {
   private val CHANNEL = "main-channel"
