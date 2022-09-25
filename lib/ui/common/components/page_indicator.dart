@@ -27,7 +27,7 @@ class PageIndicator extends StatelessWidget {
 }
 
 class _Dot extends StatelessWidget {
-  const _Dot({required this.selected, super.key});
+  const _Dot({required this.selected});
 
   final bool selected;
 

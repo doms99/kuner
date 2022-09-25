@@ -1,4 +1,3 @@
-import 'package:kuner/ui/common/components/models/currency.dart';
 import 'package:kuner/ui/common/components/models/conversion_direction.dart';
 
 abstract class ConversionInteractor {
