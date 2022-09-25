@@ -1,6 +1,8 @@
 import 'dart:async';
+import 'dart:math';
 
 import 'package:bloc/bloc.dart';
+import 'package:kuner/common/util/speed_calculator.dart';
 import 'package:kuner/device/interactor/conversion/conversion_interactor.dart';
 import 'package:kuner/device/manager/rotary_manager.dart';
 import 'package:kuner/ui/conversion/presenter/conversion_screen_action.dart';
@@ -25,14 +27,27 @@ class ConversionScreenPresenter extends Bloc<ConversionScreenAction, ConversionS
   final ConversionInteractor _conversionInteractor;
   late final StreamSubscription _subscription;
 
-  void _rotaryListener(RotaryDirection direction) {
-    switch (direction) {
+  void _rotaryListener(RotaryEvent event) {
+    switch (event.direction) {
       case RotaryDirection.clockwise:
-        add(ConversionScreenAction.newInputValue(state.inputValue + 1));
+        add(ConversionScreenAction.newInputValue(state.inputValue + _getValue(event.speed)));
         break;
       case RotaryDirection.counterclockwise:
-        add(ConversionScreenAction.newInputValue(state.inputValue - 1));
+        add(ConversionScreenAction.newInputValue(max(0, state.inputValue - _getValue(event.speed))));
         break;
+    }
+  }
+
+  double _getValue(Speed speed) {
+    switch (speed) {
+      case Speed.slow:
+        return 1;
+      case Speed.medium:
+        return 5;
+      case Speed.fast:
+        return 10;
+      case Speed.veryFast:
+        return 100;
     }
   }
 
