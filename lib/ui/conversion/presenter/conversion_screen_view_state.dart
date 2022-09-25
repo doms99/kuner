@@ -28,7 +28,7 @@ class ConversionScreenViewState with _$ConversionScreenViewState {
 
   WholeDecimalSeparated _separate(double value) {
     final whole = value.floor().toInt();
-    final decimal = ((value - whole) * 100).ceil().toInt();
+    final decimal = ((value - whole) * 100).round();
 
     return WholeDecimalSeparated(whole, decimal);
   }

@@ -10,7 +10,14 @@ class KunerApp extends StatelessWidget {
     return MaterialApp(
       title: 'Kuner',
       theme: KunerTheme.themeData,
-      home: const ConversionScreen(),
+      home: Builder(builder: (context) {
+        final size = MediaQuery.of(context).size;
+
+        return ConstrainedBox(
+          constraints: BoxConstraints.tight(size),
+          child: const ConversionScreen(),
+        );
+      }),
     );
   }
 }

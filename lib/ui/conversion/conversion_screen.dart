@@ -25,65 +25,61 @@ class _ConversionScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
     final viewState = context.watch<ConversionScreenPresenter>();
 
     return Scaffold(
-      body: ConstrainedBox(
-        constraints: BoxConstraints.tight(size),
-        child: Column(
-          children: [
-            const Text('12:13'),
-            const SizedBox(height: 2),
-            KunerConversionToggle(
-              direction: viewState.state.direction,
-              onPressed: () => viewState.add(const ConversionScreenAction.conversionTogglePressed()),
-            ),
-            Expanded(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Align(
-                    alignment: Alignment.centerLeft,
-                    child: Padding(
-                      padding: const EdgeInsets.only(left: 16.0),
-                      child: ConversionInput(
-                        currency: viewState.state.direction.input,
-                        whole: viewState.state.input.whole,
-                        decimal: viewState.state.input.decimal,
-                      ),
+      body: Column(
+        children: [
+          const Text('12:13'),
+          const SizedBox(height: 2),
+          KunerConversionToggle(
+            direction: viewState.state.direction,
+            onPressed: () => viewState.add(const ConversionScreenAction.conversionTogglePressed()),
+          ),
+          Expanded(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 16.0),
+                    child: ConversionInput(
+                      currency: viewState.state.direction.input,
+                      whole: viewState.state.input.whole,
+                      decimal: viewState.state.input.decimal,
                     ),
                   ),
-                  Align(
-                    alignment: Alignment.centerRight,
-                    child: SingleChildScrollView(
-                      scrollDirection: Axis.horizontal,
-                      primary: false,
-                      reverse: true,
-                      child: Padding(
-                        padding: const EdgeInsets.only(right: 12.0),
-                        child: ConversionOutput(
-                          currency: viewState.state.direction.output,
-                          whole: viewState.state.converted.whole,
-                          decimal: viewState.state.converted.decimal,
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            const SizedBox(
-              height: 34,
-              child: Center(
-                child: PageIndicator(
-                  count: 3,
-                  selected: 0,
                 ),
+                Align(
+                  alignment: Alignment.centerRight,
+                  child: SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    primary: false,
+                    reverse: true,
+                    child: Padding(
+                      padding: const EdgeInsets.only(right: 12.0),
+                      child: ConversionOutput(
+                        currency: viewState.state.direction.output,
+                        whole: viewState.state.converted.whole,
+                        decimal: viewState.state.converted.decimal,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(
+            height: 34,
+            child: Center(
+              child: PageIndicator(
+                count: 3,
+                selected: 0,
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
