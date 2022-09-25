@@ -4,13 +4,17 @@ class KunerButton extends StatelessWidget {
   const KunerButton({
     required this.child,
     required this.onPressed,
+    this.expands = false,
     this.disabled = false,
+    this.padding = const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
     super.key,
   });
 
   final Widget child;
   final bool disabled;
   final VoidCallback? onPressed;
+  final EdgeInsets padding;
+  final bool expands;
 
   @override
   Widget build(BuildContext context) {
@@ -24,8 +28,9 @@ class KunerButton extends StatelessWidget {
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(1000)),
         child: InkWell(
           onTap: onPressed,
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+          child: Container(
+            width: expands ? double.infinity : null,
+            padding: padding,
             child: child,
           ),
         ),
