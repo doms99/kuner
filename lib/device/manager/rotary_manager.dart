@@ -16,9 +16,9 @@ class RotaryManager {
       if (event is! double) return;
 
       if (event < 0) {
-        _streamController.sink.add(RotaryDirection.clockwise);
-      } else {
         _streamController.sink.add(RotaryDirection.counterclockwise);
+      } else {
+        _streamController.sink.add(RotaryDirection.clockwise);
       }
     });
   }

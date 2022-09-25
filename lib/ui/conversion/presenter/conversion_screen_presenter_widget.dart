@@ -14,7 +14,10 @@ class ConversionScreenPresenterWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => ConversionScreenPresenter(GetIt.I.get()),
+      create: (context) => ConversionScreenPresenter(
+        GetIt.I.get(),
+        GetIt.I.get(),
+      ),
       child: child,
     );
   }

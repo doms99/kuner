@@ -22,7 +22,7 @@ class ConversionInteractorImpl implements ConversionInteractor {
 
   @override
   double convert(double value, {required ConversionDirection direction}) {
-    switch (direction.output) {
+    switch (direction.input) {
       case Currency.eur:
         return value * _conversionRateHolder.conversionRate;
       case Currency.hrk:

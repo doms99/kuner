@@ -48,7 +48,7 @@ class _ConversionScreen extends StatelessWidget {
                     child: Padding(
                       padding: const EdgeInsets.only(left: 16.0),
                       child: ConversionInput(
-                        currency: Currency.hrk,
+                        currency: viewState.state.direction.input,
                         whole: viewState.state.input.whole,
                         decimal: viewState.state.input.decimal,
                       ),
@@ -63,7 +63,7 @@ class _ConversionScreen extends StatelessWidget {
                       child: Padding(
                         padding: const EdgeInsets.only(right: 12.0),
                         child: ConversionOutput(
-                          currency: Currency.eur,
+                          currency: viewState.state.direction.output,
                           whole: viewState.state.converted.whole,
                           decimal: viewState.state.converted.decimal,
                         ),

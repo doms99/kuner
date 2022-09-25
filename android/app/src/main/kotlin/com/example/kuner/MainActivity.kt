@@ -33,7 +33,7 @@ class MainActivity: FlutterActivity() {
           events?.success(delta)
         }
         if(arguments is Map<*, *> && arguments["vibrate"] == true) {
-          mainActivity.vibrator.vibrate(50)
+          mainActivity.vibrator.vibrate(10)
         }
 
         true
