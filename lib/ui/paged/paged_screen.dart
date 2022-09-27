@@ -38,7 +38,9 @@ class _PagedScreenState extends State<PagedScreen> {
               height: 24,
               width: 24,
               bottom: (_pageController.page ?? 0) * (size.height - 24),
-              child: _Arrow(_pageController.page ?? 0),
+              child: IgnorePointer(
+                child: _Arrow(_pageController.page ?? 0),
+              ),
             );
           },
         ),
@@ -63,25 +65,37 @@ class _Arrow extends StatelessWidget {
 }
 
 class _ArrowPainter extends CustomPainter {
-  _ArrowPainter(this.context, this.percentageScrolled);
+  _ArrowPainter(
+    this.context,
+    this.percentageScrolled,
+  ) : assert(percentageScrolled >= 0 && percentageScrolled <= 1);
+
+  static const lineLength = 6.0;
+  static const arrowHeight = 6.0 * 1.41421356 / 2; // half of the diagonal
 
   final BuildContext context;
   final double percentageScrolled;
+
+  double get _currentWidth {
+    return lineLength * pow(2, 1 - (percentageScrolled - 0.5).abs());
+  }
+
+  double get _currentHeight {
+    return 2 * arrowHeight * (percentageScrolled - 0.5).abs() * 2;
+  }
 
   @override
   void paint(Canvas canvas, Size size) {
     // _drawBackground(canvas, size);
 
-    final width = 6 * sqrt(2);
-    final height = width / 2;
-    final horizontalOffset = (size.width - width) / 2;
-    final middleVerticalOffset = (size.height - height) / 2 + height;
-    final currentMiddleVerticalOffset = middleVerticalOffset - 2 * height * percentageScrolled;
-    final outerVerticalOffset = middleVerticalOffset - height;
+    final horizontalOffset = (size.width - _currentWidth) / 2;
+    final topArrowOffset = (size.height - _currentHeight) / 2;
+    final middleVerticalOffset = topArrowOffset + _currentHeight * (1 - percentageScrolled);
+    final outerVerticalOffset = topArrowOffset + _currentHeight / 2;
 
     final leftOuterOffset = Offset(horizontalOffset, outerVerticalOffset);
-    final middleOffset = Offset(size.width / 2, currentMiddleVerticalOffset);
-    final rightOuterOffset = Offset(horizontalOffset + width, outerVerticalOffset);
+    final middleOffset = Offset(size.width / 2, middleVerticalOffset);
+    final rightOuterOffset = Offset(horizontalOffset + _currentWidth, outerVerticalOffset);
 
     final paint = Paint()..color = Theme.of(context).colorScheme.surface;
     paint.strokeCap = StrokeCap.round;

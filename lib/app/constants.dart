@@ -4,5 +4,7 @@ class Constants {
   static const defaultConversionRate = 7.5345;
 
   static const rotaryChannelId = 'main-channel';
+
   static const conversionRateKey = 'conversion-rate';
+  static const settingsDecimalKey = 'settings-decimal-key';
 }

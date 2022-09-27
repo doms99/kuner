@@ -22,6 +22,7 @@ final _colorScheme = ThemeData.dark().colorScheme.copyWith(
       brightness: Brightness.dark,
       primary: const Color(0xFF7952B3),
       onPrimary: const Color(0xFFECF3F6),
+      primaryVariant: const Color(0xFF2F1358),
       secondary: const Color(0xFFFFD434),
       onSecondary: const Color(0xFF000000),
       background: const Color(0xFF000000),

@@ -29,4 +29,12 @@ class SharedPreferences {
   Future<double?> getDouble(String key) async {
     return _getValue<double>(key);
   }
+
+  Future<bool> setBool(String key, bool value) {
+    return _sharedPreferences.setValue('Bool', key, value);
+  }
+
+  Future<bool?> getBool(String key) async {
+    return _getValue<bool>(key);
+  }
 }

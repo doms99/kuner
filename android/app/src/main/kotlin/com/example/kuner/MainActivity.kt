@@ -21,6 +21,9 @@ class MainActivity: FlutterActivity() {
   private val rootView get() = window.decorView.rootView
 
   override fun configureFlutterEngine(flutterEngine: FlutterEngine) {
+    val root = rootView
+    print(root)
+
     super.configureFlutterEngine(flutterEngine)
     EventChannel(flutterEngine.dartExecutor.binaryMessenger, CHANNEL)
       .setStreamHandler(RotaryStreamHandler(this))
