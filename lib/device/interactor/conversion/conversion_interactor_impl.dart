@@ -16,8 +16,8 @@ class ConversionInteractorImpl implements ConversionInteractor {
 
   @override
   Future<void> init() async {
-    final savedConversionRate = await _sharedPreferences.getDouble(Constants.conversionRateKey);
-    _conversionRateHolder.conversionRate = savedConversionRate ?? Constants.defaultConversionRate;
+    final savedConversionRate = await _sharedPreferences.getDouble(StorageConstants.conversionRateKey);
+    _conversionRateHolder.conversionRate = savedConversionRate ?? StorageConstants.defaultConversionRate;
   }
 
   @override
@@ -32,7 +32,7 @@ class ConversionInteractorImpl implements ConversionInteractor {
 
   @override
   Future<void> updateConversionRate(double newRate) async {
-    final result = await _sharedPreferences.setDouble(Constants.conversionRateKey, newRate);
+    final result = await _sharedPreferences.setDouble(StorageConstants.conversionRateKey, newRate);
     if (result) {
       _conversionRateHolder.conversionRate = newRate;
     }
