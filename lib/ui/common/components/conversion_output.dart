@@ -36,9 +36,12 @@ class ConversionOutput extends StatelessWidget {
           WidgetSpan(
             baseline: TextBaseline.alphabetic,
             alignment: PlaceholderAlignment.aboveBaseline,
-            child: Padding(
-              padding: const EdgeInsets.only(left: 6.0),
-              child: CurrencyIcon.large(currency: currency),
+            child: AnimatedSize(
+              duration: const Duration(milliseconds: 50),
+              child: Padding(
+                padding: const EdgeInsets.only(left: 6.0),
+                child: CurrencyIcon.large(currency: currency),
+              ),
             ),
           )
         ],

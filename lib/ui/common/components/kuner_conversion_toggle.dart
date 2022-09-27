@@ -14,7 +14,7 @@ class KunerConversionToggle extends StatelessWidget {
   final ConversionDirection direction;
   final VoidCallback onPressed;
 
-  String _getFirstLabel() {
+  String get _firstLabel {
     switch (direction) {
       case ConversionDirection.hrk_eur:
         return 'HRK';
@@ -23,7 +23,7 @@ class KunerConversionToggle extends StatelessWidget {
     }
   }
 
-  String _getSecondLabel() {
+  String get _secondLabel {
     switch (direction) {
       case ConversionDirection.hrk_eur:
         return 'EUR';
@@ -39,20 +39,26 @@ class KunerConversionToggle extends StatelessWidget {
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Text(
-            _getFirstLabel(),
-            style: Theme.of(context).textTheme.labelLarge!.copyWith(
-                  color: Theme.of(context).colorScheme.onSurface,
-                ),
+          AnimatedSize(
+            duration: const Duration(milliseconds: 50),
+            child: Text(
+              _firstLabel,
+              style: Theme.of(context).textTheme.labelLarge!.copyWith(
+                    color: Theme.of(context).colorScheme.onSurface,
+                  ),
+            ),
           ),
           const SizedBox(width: 4),
           SvgPicture.asset(Assets.svgs.rightArrow, height: 12),
           const SizedBox(width: 4),
-          Text(
-            _getSecondLabel(),
-            style: Theme.of(context).textTheme.labelLarge!.copyWith(
-                  color: Theme.of(context).colorScheme.onSurface,
-                ),
+          AnimatedSize(
+            duration: const Duration(milliseconds: 50),
+            child: Text(
+              _secondLabel,
+              style: Theme.of(context).textTheme.labelLarge!.copyWith(
+                    color: Theme.of(context).colorScheme.onSurface,
+                  ),
+            ),
           ),
         ],
       ),
