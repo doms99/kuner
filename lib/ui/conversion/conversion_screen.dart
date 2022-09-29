@@ -47,17 +47,15 @@ class _ConversionScreen extends StatelessWidget {
                   alignment: Alignment.centerLeft,
                   child: Padding(
                     padding: const EdgeInsets.only(left: 16.0),
-                    child: Builder(builder: (context) {
-                      return BlocBuilder<ConversionScreenPresenter, ConversionScreenViewState>(
-                        builder: (context, state) {
-                          return ConversionInput(
-                            currency: state.direction.input,
-                            whole: state.input.whole,
-                            decimal: state.input.decimal,
-                          );
-                        },
-                      );
-                    }),
+                    child: BlocBuilder<ConversionScreenPresenter, ConversionScreenViewState>(
+                      builder: (context, state) {
+                        return ConversionInput(
+                          currency: state.direction.input,
+                          whole: state.input.whole,
+                          decimal: state.input.decimal,
+                        );
+                      },
+                    ),
                   ),
                 ),
                 Align(

@@ -34,7 +34,7 @@ class ConversionInput extends StatelessWidget {
               padding: const EdgeInsets.only(left: 4.0),
               child: CurrencyIcon.small(currency: currency),
             ),
-          )
+          ),
         ],
       ),
     );

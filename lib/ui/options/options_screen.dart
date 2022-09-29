@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:kuner/device/model/conversion_rate_holder.dart';
 import 'package:kuner/ui/common/components/kuner_button.dart';
+import 'package:kuner/ui/conversion_rate/conversion_rate_screen.dart';
 import 'package:kuner/ui/settings/settings_screen.dart';
 
 class OptionsScreen extends StatelessWidget {
@@ -17,7 +19,7 @@ class OptionsScreen extends StatelessWidget {
           children: [
             KunerButton(
               expands: true,
-              onPressed: () {},
+              onPressed: () => Navigator.of(context).push<void>(ConversionRateScreen.route()),
               child: Text(
                 'Conversion rate',
                 textAlign: TextAlign.center,
