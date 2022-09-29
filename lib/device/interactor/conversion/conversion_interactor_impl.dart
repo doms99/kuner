@@ -31,10 +31,12 @@ class ConversionInteractorImpl implements ConversionInteractor {
   }
 
   @override
-  Future<void> updateConversionRate(double newRate) async {
-    final result = await _sharedPreferences.setDouble(StorageConstants.conversionRateKey, newRate);
-    if (result) {
+  Future<bool> updateConversionRate(double newRate) async {
+    if (await _sharedPreferences.setDouble(StorageConstants.conversionRateKey, newRate)) {
       _conversionRateHolder.conversionRate = newRate;
+      return true;
     }
+
+    return false;
   }
 }

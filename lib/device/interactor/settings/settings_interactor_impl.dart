@@ -20,8 +20,12 @@ class SettingsInteractorImpl implements SettingsInteractor {
   Settings get settings => _settingsHolder.settings;
 
   @override
-  Future<void> updateSettings(Settings value) async {
-    await _sharedPreferences.setBool(StorageConstants.settingsDecimalKey, value.showDecimal);
-    _settingsHolder.settings = value;
+  Future<bool> updateSettings(Settings value) async {
+    if (await _sharedPreferences.setBool(StorageConstants.settingsDecimalKey, value.showDecimal)) {
+      _settingsHolder.settings = value;
+      return true;
+    }
+
+    return false;
   }
 }

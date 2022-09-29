@@ -1,40 +1,35 @@
-import 'package:shared_preferences_android/shared_preferences_android.dart';
+import 'dart:async';
+
+import 'package:shared_preferences/shared_preferences.dart' as sp;
 
 class SharedPreferences {
-  SharedPreferences() {
-    _sharedPreferences = SharedPreferencesAndroid();
-  }
+  late sp.SharedPreferences _sharedPreferences;
 
-  late SharedPreferencesAndroid _sharedPreferences;
-
-  Future<T?> _getValue<T>(String key) async {
-    final mapOfAll = await _sharedPreferences.getAll();
-    final potentialValue = mapOfAll[key];
-
-    return potentialValue is T? ? potentialValue : null;
+  Future<void> init() async {
+    _sharedPreferences = await sp.SharedPreferences.getInstance();
   }
 
   Future<bool> setString(String key, String value) {
-    return _sharedPreferences.setValue('String', key, value);
+    return _sharedPreferences.setString(key, value);
   }
 
-  Future<String?> getString(String key) {
-    return _getValue<String>(key);
+  String? getString(String key) {
+    return _sharedPreferences.getString(key);
   }
 
   Future<bool> setDouble(String key, double value) {
-    return _sharedPreferences.setValue('Double', key, value);
+    return _sharedPreferences.setDouble(key, value);
   }
 
-  Future<double?> getDouble(String key) async {
-    return _getValue<double>(key);
+  double? getDouble(String key) {
+    return _sharedPreferences.getDouble(key);
   }
 
   Future<bool> setBool(String key, bool value) {
-    return _sharedPreferences.setValue('Bool', key, value);
+    return _sharedPreferences.setBool(key, value);
   }
 
-  Future<bool?> getBool(String key) async {
-    return _getValue<bool>(key);
+  bool? getBool(String key) {
+    return _sharedPreferences.getBool(key);
   }
 }

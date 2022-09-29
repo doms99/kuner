@@ -4,10 +4,12 @@ import 'package:kuner/app/kuner_app.dart';
 import 'package:kuner/device/di/inject_dependency.dart' as device;
 import 'package:kuner/device/interactor/conversion/conversion_interactor.dart';
 import 'package:kuner/device/interactor/settings/setting_interactor.dart';
+import 'package:kuner/device/manager/shared_preferences.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   injectDependencies();
+
   await initState();
 
   runApp(const KunerApp());
@@ -18,6 +20,8 @@ void injectDependencies() {
 }
 
 Future<void> initState() async {
+  await GetIt.I.get<SharedPreferences>().init();
+
   await Future.wait([
     GetIt.I.get<ConversionInteractor>().init(),
     GetIt.I.get<SettingsInteractor>().init(),
