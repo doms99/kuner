@@ -2,13 +2,10 @@ import 'dart:async';
 import 'dart:math';
 
 import 'package:bloc/bloc.dart';
-import 'package:kuner/app/constants.dart';
 import 'package:kuner/common/util/speed_calculator.dart';
 import 'package:kuner/device/interactor/conversion/conversion_interactor.dart';
 import 'package:kuner/device/manager/rotary_manager.dart';
-import 'package:kuner/device/manager/shared_preferences.dart';
 import 'package:kuner/device/model/settings_holder.dart';
-import 'package:kuner/ui/common/components/models/conversion_direction.dart';
 import 'package:kuner/ui/conversion/presenter/conversion_screen_action.dart';
 import 'package:kuner/ui/conversion/presenter/conversion_screen_view_state.dart';
 
