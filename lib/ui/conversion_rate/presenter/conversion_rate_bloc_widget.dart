@@ -17,6 +17,7 @@ class ConversionRateBlocWidget extends StatelessWidget {
     return BlocProvider(
       create: (context) => ConversionRateBloc(
         GetIt.I.get(),
+        GetIt.I.get(),
       ),
       child: child,
     );

@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kuner/common/util/separate_double.dart';
 import 'package:kuner/ui/common/components/conversion_input.dart';
 import 'package:kuner/ui/common/components/conversion_output.dart';
+import 'package:kuner/ui/common/components/kuner_button.dart';
 import 'package:kuner/ui/common/components/models/currency.dart';
 import 'package:kuner/ui/common/theme/number_theme.dart';
 import 'package:kuner/ui/conversion_rate/presenter/conversion_rate_bloc.dart';
@@ -32,52 +33,8 @@ class _ConversionRateScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Stack(
-        alignment: Alignment.topCenter,
+      body: Column(
         children: [
-          Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(left: 16.0),
-                child: Row(
-                  children: [
-                    const ConversionInput(
-                      currency: Currency.eur,
-                      whole: 1,
-                    ),
-                    const SizedBox(width: 2),
-                    Text(
-                      '=',
-                      style: Theme.of(context).numberTheme.titleSmall!.copyWith(
-                            color: Theme.of(context).colorScheme.primary,
-                          ),
-                    )
-                  ],
-                ),
-              ),
-              Align(
-                alignment: Alignment.centerRight,
-                child: SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  primary: false,
-                  reverse: true,
-                  child: Padding(
-                    padding: const EdgeInsets.only(right: 12.0),
-                    child: BlocBuilder<ConversionRateBloc, ConversionRateState>(
-                      builder: (context, state) {
-                        return ConversionOutput(
-                          currency: Currency.hrk,
-                          whole: state.conversionRate.whole,
-                          decimal: state.conversionRate.customDecimal(decimals: 5),
-                        );
-                      },
-                    ),
-                  ),
-                ),
-              ),
-            ],
-          ),
           Padding(
             padding: const EdgeInsets.only(top: 20),
             child: Text(
@@ -87,6 +44,52 @@ class _ConversionRateScreen extends StatelessWidget {
                   ),
             ),
           ),
+          Expanded(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(left: 16.0),
+                  child: Row(
+                    children: [
+                      const ConversionInput(
+                        currency: Currency.eur,
+                        whole: 1,
+                      ),
+                      const SizedBox(width: 2),
+                      Text(
+                        '=',
+                        style: Theme.of(context).numberTheme.titleSmall!.copyWith(
+                              color: Theme.of(context).colorScheme.primary,
+                            ),
+                      )
+                    ],
+                  ),
+                ),
+                Align(
+                  alignment: Alignment.centerRight,
+                  child: SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    primary: false,
+                    reverse: true,
+                    child: Padding(
+                      padding: const EdgeInsets.only(right: 12.0),
+                      child: BlocBuilder<ConversionRateBloc, ConversionRateState>(
+                        builder: (context, state) {
+                          return ConversionOutput(
+                            currency: Currency.hrk,
+                            whole: state.conversionRate.whole,
+                            decimal: state.conversionRate.customDecimal(decimals: 5),
+                          );
+                        },
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(height: 34 + 4), // placeholder for an icon button
         ],
       ),
     );
