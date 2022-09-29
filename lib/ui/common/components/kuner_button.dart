@@ -6,7 +6,7 @@ class KunerButton extends StatelessWidget {
     required this.onPressed,
     this.expands = false,
     this.disabled = false,
-    this.padding = const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+    this.padding = const EdgeInsets.symmetric(horizontal: 12, vertical: 14),
     super.key,
   });
 

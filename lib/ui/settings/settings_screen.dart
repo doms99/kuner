@@ -32,13 +32,13 @@ class SettingsScreen extends StatelessWidget {
                 ),
                 clipBehavior: Clip.antiAlias,
                 width: double.infinity,
-                padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 12),
+                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 14),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
                       'Decimal',
-                      style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                      style: Theme.of(context).textTheme.labelLarge!.copyWith(
                             color: Theme.of(context).colorScheme.onSurface,
                           ),
                     ),

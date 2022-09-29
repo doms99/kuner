@@ -35,6 +35,7 @@ class KunerConversionToggle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return KunerButton(
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
       onPressed: onPressed,
       child: Row(
         mainAxisSize: MainAxisSize.min,

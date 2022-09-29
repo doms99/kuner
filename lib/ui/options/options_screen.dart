@@ -16,26 +16,25 @@ class OptionsScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             KunerButton(
-              padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 12),
               expands: true,
               onPressed: () {},
               child: Text(
                 'Conversion rate',
                 textAlign: TextAlign.center,
-                style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                overflow: TextOverflow.ellipsis,
+                style: Theme.of(context).textTheme.bodyLarge!.copyWith(
                       color: Theme.of(context).colorScheme.onSurface,
                     ),
               ),
             ),
-            const SizedBox(height: 8),
+            const SizedBox(height: 4),
             KunerButton(
-              padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 12),
               expands: true,
               onPressed: () => Navigator.of(context).push<void>(SettingsScreen.route()),
               child: Text(
                 'Settings',
                 textAlign: TextAlign.center,
-                style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                style: Theme.of(context).textTheme.bodyLarge!.copyWith(
                       color: Theme.of(context).colorScheme.onSurface,
                     ),
               ),
