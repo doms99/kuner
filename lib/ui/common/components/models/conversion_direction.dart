@@ -32,4 +32,25 @@ enum ConversionDirection {
         return Currency.eur;
     }
   }
+
+  @override
+  String toString() {
+    switch (this) {
+      case ConversionDirection.eur_hrk:
+        return 'eur_hrk';
+      case ConversionDirection.hrk_eur:
+        return 'hrk_eur';
+    }
+  }
+
+  static ConversionDirection? fromString(String? value) {
+    switch (value) {
+      case 'eur_hrk':
+        return ConversionDirection.eur_hrk;
+      case 'hrk_eur':
+        return ConversionDirection.hrk_eur;
+      default:
+        return null;
+    }
+  }
 }

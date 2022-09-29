@@ -90,8 +90,8 @@ class __$$_SettingsScreenViewStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_SettingsScreenViewState implements _SettingsScreenViewState {
-  const _$_SettingsScreenViewState({required this.showDecimal});
+class _$_SettingsScreenViewState extends _SettingsScreenViewState {
+  const _$_SettingsScreenViewState({required this.showDecimal}) : super._();
 
   @override
   final bool showDecimal;
@@ -122,9 +122,10 @@ class _$_SettingsScreenViewState implements _SettingsScreenViewState {
               this, _$identity);
 }
 
-abstract class _SettingsScreenViewState implements SettingsScreenViewState {
+abstract class _SettingsScreenViewState extends SettingsScreenViewState {
   const factory _SettingsScreenViewState({required final bool showDecimal}) =
       _$_SettingsScreenViewState;
+  const _SettingsScreenViewState._() : super._();
 
   @override
   bool get showDecimal;

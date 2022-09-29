@@ -17,6 +17,7 @@ class ConversionScreenPresenterWidget extends StatelessWidget {
       create: (context) => ConversionScreenPresenter(
         GetIt.I.get(),
         GetIt.I.get(),
+        GetIt.I.get(),
       ),
       child: child,
     );

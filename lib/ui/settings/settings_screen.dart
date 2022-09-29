@@ -38,7 +38,7 @@ class SettingsScreen extends StatelessWidget {
                   children: [
                     Text(
                       'Decimal',
-                      style: Theme.of(context).textTheme.labelLarge!.copyWith(
+                      style: Theme.of(context).textTheme.bodyLarge!.copyWith(
                             color: Theme.of(context).colorScheme.onSurface,
                           ),
                     ),

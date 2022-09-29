@@ -2,6 +2,10 @@ class Constants {
   Constants._();
 
   static const rotaryChannelId = 'main-channel';
+
+  static const directionKey = 'direction-key';
+  static const inputKey = 'input-key';
+  static const outputKey = 'output-key';
 }
 
 class StorageConstants {

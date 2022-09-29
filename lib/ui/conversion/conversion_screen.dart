@@ -6,6 +6,7 @@ import 'package:kuner/ui/conversion/presenter/conversion_screen_action.dart';
 import 'package:kuner/ui/conversion/presenter/conversion_screen_presenter.dart';
 import 'package:kuner/ui/conversion/presenter/conversion_screen_presenter_widget.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:kuner/ui/conversion/presenter/conversion_screen_view_state.dart';
 
 class ConversionScreen extends StatelessWidget {
   const ConversionScreen({super.key});
@@ -23,16 +24,20 @@ class _ConversionScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final viewState = context.watch<ConversionScreenPresenter>();
-
     return Scaffold(
       body: Column(
         children: [
           const Text('12:13'),
           const SizedBox(height: 2),
-          KunerConversionToggle(
-            direction: viewState.state.direction,
-            onPressed: () => viewState.add(const ConversionScreenAction.conversionTogglePressed()),
+          BlocBuilder<ConversionScreenPresenter, ConversionScreenViewState>(
+            builder: (context, state) {
+              return KunerConversionToggle(
+                direction: state.direction,
+                onPressed: () => context.read<ConversionScreenPresenter>().add(
+                      const ConversionScreenAction.conversionTogglePressed(),
+                    ),
+              );
+            },
           ),
           Expanded(
             child: Column(
@@ -42,11 +47,17 @@ class _ConversionScreen extends StatelessWidget {
                   alignment: Alignment.centerLeft,
                   child: Padding(
                     padding: const EdgeInsets.only(left: 16.0),
-                    child: ConversionInput(
-                      currency: viewState.state.direction.input,
-                      whole: viewState.state.input.whole,
-                      decimal: viewState.state.input.decimal,
-                    ),
+                    child: Builder(builder: (context) {
+                      return BlocBuilder<ConversionScreenPresenter, ConversionScreenViewState>(
+                        builder: (context, state) {
+                          return ConversionInput(
+                            currency: state.direction.input,
+                            whole: state.input.whole,
+                            decimal: state.input.decimal,
+                          );
+                        },
+                      );
+                    }),
                   ),
                 ),
                 Align(
@@ -57,10 +68,14 @@ class _ConversionScreen extends StatelessWidget {
                     reverse: true,
                     child: Padding(
                       padding: const EdgeInsets.only(right: 12.0),
-                      child: ConversionOutput(
-                        currency: viewState.state.direction.output,
-                        whole: viewState.state.converted.whole,
-                        decimal: viewState.state.converted.decimal,
+                      child: BlocBuilder<ConversionScreenPresenter, ConversionScreenViewState>(
+                        builder: (context, state) {
+                          return ConversionOutput(
+                            currency: state.direction.output,
+                            whole: state.converted.whole,
+                            decimal: state.showDecimal ? state.converted.decimal : null,
+                          );
+                        },
                       ),
                     ),
                   ),

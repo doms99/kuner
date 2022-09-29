@@ -16,6 +16,7 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$ConversionScreenViewState {
+  bool get showDecimal => throw _privateConstructorUsedError;
   ConversionDirection get direction => throw _privateConstructorUsedError;
   double get inputValue => throw _privateConstructorUsedError;
   double get convertedValue => throw _privateConstructorUsedError;
@@ -31,7 +32,8 @@ abstract class $ConversionScreenViewStateCopyWith<$Res> {
           $Res Function(ConversionScreenViewState) then) =
       _$ConversionScreenViewStateCopyWithImpl<$Res>;
   $Res call(
-      {ConversionDirection direction,
+      {bool showDecimal,
+      ConversionDirection direction,
       double inputValue,
       double convertedValue});
 }
@@ -47,11 +49,16 @@ class _$ConversionScreenViewStateCopyWithImpl<$Res>
 
   @override
   $Res call({
+    Object? showDecimal = freezed,
     Object? direction = freezed,
     Object? inputValue = freezed,
     Object? convertedValue = freezed,
   }) {
     return _then(_value.copyWith(
+      showDecimal: showDecimal == freezed
+          ? _value.showDecimal
+          : showDecimal // ignore: cast_nullable_to_non_nullable
+              as bool,
       direction: direction == freezed
           ? _value.direction
           : direction // ignore: cast_nullable_to_non_nullable
@@ -77,7 +84,8 @@ abstract class _$$_ConversionScreenViewStateCopyWith<$Res>
       __$$_ConversionScreenViewStateCopyWithImpl<$Res>;
   @override
   $Res call(
-      {ConversionDirection direction,
+      {bool showDecimal,
+      ConversionDirection direction,
       double inputValue,
       double convertedValue});
 }
@@ -97,11 +105,16 @@ class __$$_ConversionScreenViewStateCopyWithImpl<$Res>
 
   @override
   $Res call({
+    Object? showDecimal = freezed,
     Object? direction = freezed,
     Object? inputValue = freezed,
     Object? convertedValue = freezed,
   }) {
     return _then(_$_ConversionScreenViewState(
+      showDecimal: showDecimal == freezed
+          ? _value.showDecimal
+          : showDecimal // ignore: cast_nullable_to_non_nullable
+              as bool,
       direction: direction == freezed
           ? _value.direction
           : direction // ignore: cast_nullable_to_non_nullable
@@ -122,11 +135,14 @@ class __$$_ConversionScreenViewStateCopyWithImpl<$Res>
 
 class _$_ConversionScreenViewState extends _ConversionScreenViewState {
   const _$_ConversionScreenViewState(
-      {required this.direction,
+      {required this.showDecimal,
+      required this.direction,
       required this.inputValue,
       required this.convertedValue})
       : super._();
 
+  @override
+  final bool showDecimal;
   @override
   final ConversionDirection direction;
   @override
@@ -136,7 +152,7 @@ class _$_ConversionScreenViewState extends _ConversionScreenViewState {
 
   @override
   String toString() {
-    return 'ConversionScreenViewState(direction: $direction, inputValue: $inputValue, convertedValue: $convertedValue)';
+    return 'ConversionScreenViewState(showDecimal: $showDecimal, direction: $direction, inputValue: $inputValue, convertedValue: $convertedValue)';
   }
 
   @override
@@ -144,6 +160,8 @@ class _$_ConversionScreenViewState extends _ConversionScreenViewState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_ConversionScreenViewState &&
+            const DeepCollectionEquality()
+                .equals(other.showDecimal, showDecimal) &&
             const DeepCollectionEquality().equals(other.direction, direction) &&
             const DeepCollectionEquality()
                 .equals(other.inputValue, inputValue) &&
@@ -154,6 +172,7 @@ class _$_ConversionScreenViewState extends _ConversionScreenViewState {
   @override
   int get hashCode => Object.hash(
       runtimeType,
+      const DeepCollectionEquality().hash(showDecimal),
       const DeepCollectionEquality().hash(direction),
       const DeepCollectionEquality().hash(inputValue),
       const DeepCollectionEquality().hash(convertedValue));
@@ -167,11 +186,14 @@ class _$_ConversionScreenViewState extends _ConversionScreenViewState {
 
 abstract class _ConversionScreenViewState extends ConversionScreenViewState {
   const factory _ConversionScreenViewState(
-      {required final ConversionDirection direction,
+      {required final bool showDecimal,
+      required final ConversionDirection direction,
       required final double inputValue,
       required final double convertedValue}) = _$_ConversionScreenViewState;
   const _ConversionScreenViewState._() : super._();
 
+  @override
+  bool get showDecimal;
   @override
   ConversionDirection get direction;
   @override
