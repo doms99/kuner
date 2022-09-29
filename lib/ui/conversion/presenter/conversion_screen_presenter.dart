@@ -49,15 +49,17 @@ class ConversionScreenPresenter extends Bloc<Event, State> {
   void _rotaryListener(RotaryEvent event) {
     switch (event.direction) {
       case RotaryDirection.clockwise:
-        add(ConversionScreenAction.newInputValue(state.inputValue + _getValue(event.speed)));
+        add(ConversionScreenAction.newInputValue(state.inputValue + _getValueForSpeed(event.speed)));
         break;
       case RotaryDirection.counterclockwise:
-        add(ConversionScreenAction.newInputValue(max(0, state.inputValue - _getValue(event.speed))));
+        add(ConversionScreenAction.newInputValue(
+          max(0, state.inputValue - _getValueForSpeed(event.speed)),
+        ));
         break;
     }
   }
 
-  double _getValue(Speed speed) {
+  double _getValueForSpeed(Speed speed) {
     switch (speed) {
       case Speed.slow:
         return 1;
