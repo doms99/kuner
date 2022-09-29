@@ -1,9 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:kuner/common/util/separate_double.dart';
 import 'package:kuner/ui/common/components/conversion_input.dart';
 import 'package:kuner/ui/common/components/conversion_output.dart';
 import 'package:kuner/ui/common/components/models/currency.dart';
 import 'package:kuner/ui/common/theme/number_theme.dart';
+import 'package:kuner/ui/conversion_rate/presenter/conversion_rate_bloc.dart';
+import 'package:kuner/ui/conversion_rate/presenter/conversion_rate_bloc_widget.dart';
 
 class ConversionRateScreen extends StatelessWidget {
   const ConversionRateScreen({super.key});
@@ -13,6 +17,17 @@ class ConversionRateScreen extends StatelessWidget {
       return const ConversionRateScreen();
     });
   }
+
+  @override
+  Widget build(BuildContext context) {
+    return const ConversionRateBlocWidget(
+      child: _ConversionRateScreen(),
+    );
+  }
+}
+
+class _ConversionRateScreen extends StatelessWidget {
+  const _ConversionRateScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +42,7 @@ class ConversionRateScreen extends StatelessWidget {
                 padding: const EdgeInsets.only(left: 16.0),
                 child: Row(
                   children: [
-                    ConversionInput(
+                    const ConversionInput(
                       currency: Currency.eur,
                       whole: 1,
                     ),
@@ -49,10 +64,14 @@ class ConversionRateScreen extends StatelessWidget {
                   reverse: true,
                   child: Padding(
                     padding: const EdgeInsets.only(right: 12.0),
-                    child: ConversionOutput(
-                      currency: Currency.hrk,
-                      whole: 7,
-                      decimal: 5345,
+                    child: BlocBuilder<ConversionRateBloc, ConversionRateState>(
+                      builder: (context, state) {
+                        return ConversionOutput(
+                          currency: Currency.hrk,
+                          whole: state.conversionRate.whole,
+                          decimal: state.conversionRate.customDecimal(decimals: 5),
+                        );
+                      },
                     ),
                   ),
                 ),

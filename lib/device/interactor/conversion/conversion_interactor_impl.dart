@@ -16,9 +16,9 @@ class ConversionInteractorImpl implements ConversionInteractor {
   final SharedPreferences _sharedPreferences;
 
   @override
-  Future<void> init() async {
-    final savedConversionRate = await _sharedPreferences.getDouble(StorageConstants.conversionRateKey);
-    _conversionRateHolder.conversionRate = savedConversionRate ?? StorageConstants.defaultConversionRate;
+  void init() {
+    final savedConversionRate = _sharedPreferences.getDouble(StorageConstants.conversionRateKey);
+    _conversionRateHolder.conversionRate = savedConversionRate ?? Constants.defaultConversionRate;
   }
 
   @override
@@ -42,21 +42,27 @@ class ConversionInteractorImpl implements ConversionInteractor {
   }
 
   @override
+  double getSavedConversionRate() {
+    return _sharedPreferences.getDouble(StorageConstants.conversionRateKey) ?? Constants.defaultConversionRate;
+  }
+
+  @override
   ConversionState getSavedState() {
     return ConversionState(
-      conversionDirection: ConversionDirection.fromString(_sharedPreferences.getString(Constants.directionKey)) ??
-          ConversionDirection.eur_hrk,
-      inputValue: _sharedPreferences.getDouble(Constants.inputKey) ?? 0.0,
-      outputValue: _sharedPreferences.getDouble(Constants.outputKey) ?? 0.0,
+      conversionDirection:
+          ConversionDirection.fromString(_sharedPreferences.getString(StorageConstants.directionKey)) ??
+              ConversionDirection.eur_hrk,
+      inputValue: _sharedPreferences.getDouble(StorageConstants.inputKey) ?? 0.0,
+      outputValue: _sharedPreferences.getDouble(StorageConstants.outputKey) ?? 0.0,
     );
   }
 
   @override
   Future<void> saveState(ConversionState state) async {
     await Future.wait([
-      _sharedPreferences.setString(Constants.directionKey, state.conversionDirection.toString()),
-      _sharedPreferences.setDouble(Constants.inputKey, state.inputValue),
-      _sharedPreferences.setDouble(Constants.outputKey, state.outputValue)
+      _sharedPreferences.setString(StorageConstants.directionKey, state.conversionDirection.toString()),
+      _sharedPreferences.setDouble(StorageConstants.inputKey, state.inputValue),
+      _sharedPreferences.setDouble(StorageConstants.outputKey, state.outputValue)
     ]);
   }
 }

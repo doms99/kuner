@@ -25,10 +25,6 @@ class ConversionScreenViewState with _$ConversionScreenViewState {
     );
   }
 
-  WholeDecimalSeparated get input => _separate(inputValue);
-
-  WholeDecimalSeparated get converted => _separate(convertedValue);
-
   ConversionState toConversionState() {
     return ConversionState(
       conversionDirection: direction,
@@ -36,21 +32,4 @@ class ConversionScreenViewState with _$ConversionScreenViewState {
       outputValue: convertedValue,
     );
   }
-
-  WholeDecimalSeparated _separate(double value) {
-    final whole = value.floor().toInt();
-    final decimal = ((value - whole) * 100).round();
-
-    return WholeDecimalSeparated(whole, decimal);
-  }
-}
-
-class WholeDecimalSeparated {
-  WholeDecimalSeparated(
-    this.whole,
-    this.decimal,
-  );
-
-  final int whole;
-  final int decimal;
 }

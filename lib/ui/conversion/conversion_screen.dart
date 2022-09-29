@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kuner/common/util/separate_double.dart';
 import 'package:kuner/ui/common/components/conversion_input.dart';
 import 'package:kuner/ui/common/components/conversion_output.dart';
 import 'package:kuner/ui/common/components/kuner_conversion_toggle.dart';
@@ -51,8 +52,8 @@ class _ConversionScreen extends StatelessWidget {
                       builder: (context, state) {
                         return ConversionInput(
                           currency: state.direction.input,
-                          whole: state.input.whole,
-                          decimal: state.input.decimal,
+                          whole: state.inputValue.whole,
+                          decimal: state.inputValue.decimal,
                         );
                       },
                     ),
@@ -70,8 +71,8 @@ class _ConversionScreen extends StatelessWidget {
                         builder: (context, state) {
                           return ConversionOutput(
                             currency: state.direction.output,
-                            whole: state.converted.whole,
-                            decimal: state.showDecimal ? state.converted.decimal : null,
+                            whole: state.convertedValue.whole,
+                            decimal: state.showDecimal ? state.convertedValue.decimal : null,
                           );
                         },
                       ),

@@ -22,8 +22,6 @@ void injectDependencies() {
 Future<void> initState() async {
   await GetIt.I.get<SharedPreferences>().init();
 
-  await Future.wait([
-    GetIt.I.get<ConversionInteractor>().init(),
-    GetIt.I.get<SettingsInteractor>().init(),
-  ]);
+  GetIt.I.get<ConversionInteractor>().init();
+  GetIt.I.get<SettingsInteractor>().init();
 }

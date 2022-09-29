@@ -11,9 +11,9 @@ class SettingsInteractorImpl implements SettingsInteractor {
   final SharedPreferences _sharedPreferences;
 
   @override
-  Future<void> init() async {
-    final showDecimal = await _sharedPreferences.getBool(StorageConstants.settingsDecimalKey);
-    _settingsHolder.settings = Settings(showDecimal: showDecimal ?? StorageConstants.defaultSettingsDecimal);
+  void init() {
+    final showDecimal = _sharedPreferences.getBool(StorageConstants.settingsDecimalKey);
+    _settingsHolder.settings = Settings(showDecimal: showDecimal ?? Constants.defaultSettingsDecimal);
   }
 
   @override

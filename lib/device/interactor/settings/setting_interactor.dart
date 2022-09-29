@@ -4,5 +4,5 @@ abstract class SettingsInteractor {
   Settings get settings;
 
   Future<bool> updateSettings(Settings value);
-  Future<void> init();
+  void init();
 }
