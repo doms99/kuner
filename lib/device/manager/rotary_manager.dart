@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:math';
 
 import 'package:flutter/services.dart';
 
@@ -13,6 +14,7 @@ enum RotaryDirection {
 class RotaryManager {
   RotaryManager() {
     _eventChannel.receiveBroadcastStream({'vibrate': true}).listen((dynamic event) {
+      print(event);
       if (event is! double) return;
 
       if (last != null && event.isNegative != last?.isNegative) {
@@ -23,14 +25,14 @@ class RotaryManager {
         _streamController.sink.add(
           RotaryEvent(
             direction: RotaryDirection.counterclockwise,
-            speed: _speedCalculator.click(),
+            speed: _speedCalculator.click(multiplier: event.abs()),
           ),
         );
       } else {
         _streamController.sink.add(
           RotaryEvent(
             direction: RotaryDirection.clockwise,
-            speed: _speedCalculator.click(),
+            speed: _speedCalculator.click(multiplier: event.abs()),
           ),
         );
       }

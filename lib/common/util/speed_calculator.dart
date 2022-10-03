@@ -21,16 +21,16 @@ enum Speed {
 class SpeedCalculator {
   DateTime? last;
 
-  Speed click() {
+  Speed click({double multiplier = 1}) {
     final now = DateTime.now();
     final timeFromLast = now.millisecondsSinceEpoch - (last?.millisecondsSinceEpoch ?? 0);
     last = now;
 
-    if (timeFromLast >= Speed.slow.milliseconds) {
+    if (timeFromLast / multiplier >= Speed.slow.milliseconds) {
       return Speed.slow;
-    } else if (timeFromLast >= Speed.medium.milliseconds) {
+    } else if (timeFromLast / multiplier >= Speed.medium.milliseconds) {
       return Speed.medium;
-    } else if (timeFromLast >= Speed.fast.milliseconds) {
+    } else if (timeFromLast / multiplier >= Speed.fast.milliseconds) {
       return Speed.fast;
     } else {
       return Speed.veryFast;
