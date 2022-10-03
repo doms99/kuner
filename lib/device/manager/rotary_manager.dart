@@ -14,7 +14,6 @@ enum RotaryDirection {
 class RotaryManager {
   RotaryManager() {
     _eventChannel.receiveBroadcastStream({'vibrate': true}).listen((dynamic event) {
-      print(event);
       if (event is! double) return;
 
       if (last != null && event.isNegative != last?.isNegative) {
