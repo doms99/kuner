@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:kuner/ui/common/components/kuner_toggle.dart';
+import 'package:kuner/ui/common/wear_os/wear_os_route.dart';
 import 'package:kuner/ui/settings/presenter/settings_screen_action.dart';
 import 'package:kuner/ui/settings/presenter/settings_screen_presenter.dart';
 import 'package:kuner/ui/settings/presenter/settings_screen_presenter_widget.dart';
@@ -10,7 +11,7 @@ class SettingsScreen extends StatelessWidget {
   const SettingsScreen({super.key});
 
   static Route route() {
-    return CupertinoPageRoute<void>(
+    return WearOsPageRoute<void>(
       builder: (context) => const SettingsScreen(),
     );
   }

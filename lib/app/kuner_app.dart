@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kuner/ui/common/theme/theme.dart';
+import 'package:kuner/ui/common/wear_os/wear_os_app.dart';
 import 'package:kuner/ui/paged/paged_screen.dart';
 
 class KunerApp extends StatelessWidget {
@@ -7,7 +8,7 @@ class KunerApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return WearOsApp(
       title: 'Kuner',
       theme: KunerTheme.themeData,
       home: Builder(builder: (context) {
