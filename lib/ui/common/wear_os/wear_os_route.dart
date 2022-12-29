@@ -9,7 +9,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/rendering.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
 
 const double _kBackGestureWidth = 20.0;
 const double _kMinFlingVelocity = 1.0; // Screen widths per second.
@@ -60,7 +59,7 @@ final Animatable<double> _initialOpacityTransition = Tween<double>(
 
 final Animatable<double> _backScaleTransition = Tween<double>(
   begin: 1,
-  end: 0.9,
+  end: 0.8,
 );
 
 // ---------------------------------------------------------------------------
@@ -479,24 +478,16 @@ class WearOsPageTransition extends StatelessWidget {
     required bool linearTransition,
     required this.child,
   })  : assert(linearTransition != null),
-        _primaryScaleAnimation = (linearTransition
+        _primaryPositionAnimation = (linearTransition
                 ? primaryRouteAnimation
                 : CurvedAnimation(
                     parent: primaryRouteAnimation,
                     curve: Curves.linearToEaseOut,
                     reverseCurve: Curves.easeInToLinear,
                   ))
-            .drive(_initialScaleTransition),
-        _primaryOpacityAnimation = (linearTransition
-                ? primaryRouteAnimation
-                : CurvedAnimation(
-                    parent: primaryRouteAnimation,
-                    curve: Curves.linearToEaseOut,
-                    reverseCurve: Curves.easeInToLinear,
-                  ))
-            .drive(_initialOpacityTransition),
+            .drive(_kRightMiddleTween),
         _secondaryScaleAnimation = (linearTransition
-                ? primaryRouteAnimation
+                ? secondaryRouteAnimation
                 : CurvedAnimation(
                     parent: secondaryRouteAnimation,
                     curve: Curves.linearToEaseOut,
@@ -509,11 +500,10 @@ class WearOsPageTransition extends StatelessWidget {
                     parent: primaryRouteAnimation,
                     curve: Curves.linearToEaseOut,
                   ))
-            .drive(_CupertinoEdgeShadowDecoration.kTween);
+            .drive(_WearOsEdgeShadowDecoration.kTween);
 
   // When this page is coming in to cover another page.
-  final Animation<double> _primaryScaleAnimation;
-  final Animation<double> _primaryOpacityAnimation;
+  final Animation<Offset> _primaryPositionAnimation;
   // When this page is becoming covered by another page.
   final Animation<double> _secondaryScaleAnimation;
   final Animation<Decoration> _primaryShadowAnimation;
@@ -530,15 +520,12 @@ class WearOsPageTransition extends StatelessWidget {
 
     return ScaleTransition(
       scale: _secondaryScaleAnimation,
-      child: ScaleTransition(
-        scale: _primaryScaleAnimation,
-        // alignment: backGestureInProgress ? Alignment.centerRight : Alignment.center,
-        child: FadeTransition(
-          opacity: _primaryOpacityAnimation,
-          child: DecoratedBoxTransition(
-            decoration: _primaryShadowAnimation,
-            child: child,
-          ),
+      child: SlideTransition(
+        position: _primaryPositionAnimation,
+        textDirection: textDirection,
+        child: DecoratedBoxTransition(
+          decoration: _primaryShadowAnimation,
+          child: child,
         ),
       ),
     );
@@ -821,12 +808,12 @@ class _CupertinoBackGestureController<T> {
 // A custom [Decoration] used to paint an extra shadow on the start edge of the
 // box it's decorating. It's like a [BoxDecoration] with only a gradient except
 // it paints on the start side of the box instead of behind the box.
-class _CupertinoEdgeShadowDecoration extends Decoration {
-  const _CupertinoEdgeShadowDecoration._([this._colors]);
+class _WearOsEdgeShadowDecoration extends Decoration {
+  const _WearOsEdgeShadowDecoration._([this._colors]);
 
   static DecorationTween kTween = DecorationTween(
-    begin: const _CupertinoEdgeShadowDecoration._(), // No decoration initially.
-    end: const _CupertinoEdgeShadowDecoration._(
+    begin: const _WearOsEdgeShadowDecoration._(), // No decoration initially.
+    end: const _WearOsEdgeShadowDecoration._(
       // Eyeballed gradient used to mimic a drop shadow on the start side only.
       <Color>[
         Color(0x04000000),
@@ -864,9 +851,9 @@ class _CupertinoEdgeShadowDecoration extends Decoration {
   // See also:
   //
   //  * [Decoration.lerp].
-  static _CupertinoEdgeShadowDecoration? lerp(
-    _CupertinoEdgeShadowDecoration? a,
-    _CupertinoEdgeShadowDecoration? b,
+  static _WearOsEdgeShadowDecoration? lerp(
+    _WearOsEdgeShadowDecoration? a,
+    _WearOsEdgeShadowDecoration? b,
     double t,
   ) {
     assert(t != null);
@@ -876,20 +863,19 @@ class _CupertinoEdgeShadowDecoration extends Decoration {
     if (a == null) {
       return b!._colors == null
           ? b
-          : _CupertinoEdgeShadowDecoration._(
-              b._colors!.map<Color>((Color color) => Color.lerp(null, color, t)!).toList());
+          : _WearOsEdgeShadowDecoration._(b._colors!.map<Color>((Color color) => Color.lerp(null, color, t)!).toList());
     }
     if (b == null) {
       return a._colors == null
           ? a
-          : _CupertinoEdgeShadowDecoration._(
+          : _WearOsEdgeShadowDecoration._(
               a._colors!.map<Color>((Color color) => Color.lerp(null, color, 1.0 - t)!).toList());
     }
     assert(b._colors != null || a._colors != null);
     // If it ever becomes necessary, we could allow decorations with different
     // length' here, similarly to how it is handled in [LinearGradient.lerp].
     assert(b._colors == null || a._colors == null || a._colors!.length == b._colors!.length);
-    return _CupertinoEdgeShadowDecoration._(
+    return _WearOsEdgeShadowDecoration._(
       <Color>[
         for (int i = 0; i < b._colors!.length; i += 1) Color.lerp(a._colors?[i], b._colors?[i], t)!,
       ],
@@ -897,19 +883,19 @@ class _CupertinoEdgeShadowDecoration extends Decoration {
   }
 
   @override
-  _CupertinoEdgeShadowDecoration lerpFrom(Decoration? a, double t) {
-    if (a is _CupertinoEdgeShadowDecoration) {
-      return _CupertinoEdgeShadowDecoration.lerp(a, this, t)!;
+  _WearOsEdgeShadowDecoration lerpFrom(Decoration? a, double t) {
+    if (a is _WearOsEdgeShadowDecoration) {
+      return _WearOsEdgeShadowDecoration.lerp(a, this, t)!;
     }
-    return _CupertinoEdgeShadowDecoration.lerp(null, this, t)!;
+    return _WearOsEdgeShadowDecoration.lerp(null, this, t)!;
   }
 
   @override
-  _CupertinoEdgeShadowDecoration lerpTo(Decoration? b, double t) {
-    if (b is _CupertinoEdgeShadowDecoration) {
-      return _CupertinoEdgeShadowDecoration.lerp(this, b, t)!;
+  _WearOsEdgeShadowDecoration lerpTo(Decoration? b, double t) {
+    if (b is _WearOsEdgeShadowDecoration) {
+      return _WearOsEdgeShadowDecoration.lerp(this, b, t)!;
     }
-    return _CupertinoEdgeShadowDecoration.lerp(this, null, t)!;
+    return _WearOsEdgeShadowDecoration.lerp(this, null, t)!;
   }
 
   @override
@@ -922,7 +908,7 @@ class _CupertinoEdgeShadowDecoration extends Decoration {
     if (other.runtimeType != runtimeType) {
       return false;
     }
-    return other is _CupertinoEdgeShadowDecoration && other._colors == _colors;
+    return other is _WearOsEdgeShadowDecoration && other._colors == _colors;
   }
 
   @override
@@ -944,7 +930,7 @@ class _CupertinoEdgeShadowPainter extends BoxPainter {
         assert(_decoration._colors == null || _decoration._colors!.length > 1),
         super(onChange);
 
-  final _CupertinoEdgeShadowDecoration _decoration;
+  final _WearOsEdgeShadowDecoration _decoration;
 
   @override
   void paint(Canvas canvas, Offset offset, ImageConfiguration configuration) {
