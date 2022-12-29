@@ -22,6 +22,9 @@ class $AssetsPngsGen {
 class $AssetsSvgsGen {
   const $AssetsSvgsGen();
 
+  /// File path: assets/svgs/reset.svg
+  String get reset => 'assets/svgs/reset.svg';
+
   /// File path: assets/svgs/right_arrow.svg
   String get rightArrow => 'assets/svgs/right_arrow.svg';
 }

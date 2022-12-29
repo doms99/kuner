@@ -1,20 +1,24 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:kuner/common/util/separate_double.dart';
 import 'package:kuner/ui/common/components/conversion_input.dart';
 import 'package:kuner/ui/common/components/conversion_output.dart';
 import 'package:kuner/ui/common/components/kuner_button.dart';
 import 'package:kuner/ui/common/components/models/currency.dart';
 import 'package:kuner/ui/common/theme/number_theme.dart';
+import 'package:kuner/ui/common/wear_os/wear_os_route.dart';
 import 'package:kuner/ui/conversion_rate/presenter/conversion_rate_bloc.dart';
 import 'package:kuner/ui/conversion_rate/presenter/conversion_rate_bloc_widget.dart';
+
+import 'package:kuner/gen/assets.gen.dart';
 
 class ConversionRateScreen extends StatelessWidget {
   const ConversionRateScreen({super.key});
 
   static Route route() {
-    return CupertinoPageRoute<void>(builder: (context) {
+    return WearOsPageRoute<void>(builder: (context) {
       return const ConversionRateScreen();
     });
   }
@@ -89,7 +93,23 @@ class _ConversionRateScreen extends StatelessWidget {
               ],
             ),
           ),
-          const SizedBox(height: 34 + 4), // placeholder for an icon button
+          BlocBuilder<ConversionRateBloc, ConversionRateState>(builder: (context, state) {
+            if (state.conversionRate != state.defaultConversionRate) {
+              return Padding(
+                padding: const EdgeInsets.only(bottom: 4.0),
+                child: KunerButton(
+                  onPressed: () => context.read<ConversionRateBloc>().add(const ConversionRateEvent.reset()),
+                  padding: const EdgeInsets.all(8),
+                  child: SvgPicture.asset(
+                    Assets.svgs.reset,
+                    color: Theme.of(context).colorScheme.onSecondary,
+                  ),
+                ),
+              );
+            }
+
+            return const SizedBox(height: 34 + 4);
+          }),
         ],
       ),
     );

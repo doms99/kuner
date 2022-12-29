@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:kuner/ui/common/theme/theme.dart';
 import 'package:kuner/ui/common/wear_os/wear_os_app.dart';
@@ -14,9 +15,12 @@ class KunerApp extends StatelessWidget {
       home: Builder(builder: (context) {
         final size = MediaQuery.of(context).size;
 
-        return ConstrainedBox(
-          constraints: BoxConstraints.tight(size),
-          child: const PagedScreen(),
+        return ScrollConfiguration(
+          behavior: const CupertinoScrollBehavior(),
+          child: ConstrainedBox(
+            constraints: BoxConstraints.tight(size),
+            child: const PagedScreen(),
+          ),
         );
       }),
     );

@@ -6,5 +6,6 @@ class ConversionRateState with _$ConversionRateState {
 
   const factory ConversionRateState({
     required double conversionRate,
+    required double defaultConversionRate,
   }) = _ConversionRateState;
 }

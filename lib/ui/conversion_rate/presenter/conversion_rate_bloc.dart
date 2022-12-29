@@ -3,6 +3,7 @@ import 'dart:math';
 
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:kuner/app/constants.dart';
 import 'package:kuner/common/util/speed_calculator.dart';
 import 'package:kuner/device/interactor/conversion/conversion_interactor.dart';
 import 'package:kuner/device/manager/rotary_manager.dart';
@@ -21,12 +22,14 @@ class ConversionRateBloc extends Bloc<ConversionRateEvent, ConversionRateState> 
     RotaryManager rotaryManager,
   ) : super(ConversionRateState(
           conversionRate: _conversionInteractor.getSavedConversionRate(),
+          defaultConversionRate: Constants.defaultConversionRate,
         )) {
     on<ConversionRateEvent>((event, emit) async {
       final completer = Completer<State>();
 
       event.when(
         updateValue: (value) => _onUpdateValue(value, completer),
+        reset: () => _onUpdateValue(Constants.defaultConversionRate, completer),
       );
 
       emit(await completer.future);

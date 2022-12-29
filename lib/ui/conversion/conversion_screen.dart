@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:kuner/common/util/separate_double.dart';
 import 'package:kuner/ui/common/components/conversion_input.dart';
@@ -53,7 +54,7 @@ class _ConversionScreen extends StatelessWidget {
                         return ConversionInput(
                           currency: state.direction.input,
                           whole: state.inputValue.whole,
-                          decimal: state.inputValue.decimal,
+                          // decimal: state.inputValue.decimal,
                         );
                       },
                     ),

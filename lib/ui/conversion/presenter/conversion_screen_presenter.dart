@@ -74,8 +74,8 @@ class ConversionScreenPresenter extends Bloc<Event, State> {
 
     final newState = state.copyWith(
       direction: flipDirection,
-      inputValue: state.convertedValue,
-      convertedValue: _conversionInteractor.convert(state.convertedValue, direction: flipDirection),
+      inputValue: state.convertedValue.roundToDouble(),
+      convertedValue: _conversionInteractor.convert(state.convertedValue.roundToDouble(), direction: flipDirection),
     );
 
     _conversionInteractor.saveState(newState.toConversionState());

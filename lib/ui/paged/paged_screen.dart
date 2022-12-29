@@ -23,13 +23,20 @@ class _PagedScreenState extends State<PagedScreen> {
       fit: StackFit.expand,
       alignment: Alignment.center,
       children: [
-        PageView(
-          controller: _pageController,
-          scrollDirection: Axis.vertical,
-          children: const [
-            ConversionScreen(),
-            OptionsScreen(),
-          ],
+        NotificationListener<OverscrollIndicatorNotification>(
+          onNotification: (overscroll) {
+            overscroll.disallowIndicator();
+            return false;
+          },
+          child: PageView(
+            controller: _pageController,
+            scrollDirection: Axis.vertical,
+            scrollBehavior: const MaterialScrollBehavior(),
+            children: const [
+              ConversionScreen(),
+              OptionsScreen(),
+            ],
+          ),
         ),
         AnimatedBuilder(
           animation: _pageController,
