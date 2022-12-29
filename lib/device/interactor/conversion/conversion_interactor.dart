@@ -5,6 +5,7 @@ abstract class ConversionInteractor {
   void init();
 
   double convert(double value, {required ConversionDirection direction});
+
   Future<bool> updateConversionRate(double newRate);
   double getSavedConversionRate();
 

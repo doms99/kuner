@@ -5,14 +5,14 @@ import 'package:flutter/material.dart';
 import 'package:kuner/ui/conversion/conversion_screen.dart';
 import 'package:kuner/ui/options/options_screen.dart';
 
-class PagedScreen extends StatefulWidget {
-  const PagedScreen({super.key});
+class HomeScreen extends StatefulWidget {
+  const HomeScreen({super.key});
 
   @override
-  State<PagedScreen> createState() => _PagedScreenState();
+  State<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _PagedScreenState extends State<PagedScreen> {
+class _HomeScreenState extends State<HomeScreen> {
   final _pageController = PageController();
 
   @override

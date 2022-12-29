@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:kuner/ui/common/theme/theme.dart';
 import 'package:kuner/ui/common/wear_os/wear_os_app.dart';
-import 'package:kuner/ui/paged/paged_screen.dart';
+import 'package:kuner/ui/home/home_screen.dart';
 
 class KunerApp extends StatelessWidget {
   const KunerApp({super.key});
@@ -19,7 +19,7 @@ class KunerApp extends StatelessWidget {
           behavior: const CupertinoScrollBehavior(),
           child: ConstrainedBox(
             constraints: BoxConstraints.tight(size),
-            child: const PagedScreen(),
+            child: const HomeScreen(),
           ),
         );
       }),
