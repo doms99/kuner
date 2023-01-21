@@ -1,8 +1,8 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:kuner/common/util/separate_double.dart';
 import 'package:kuner/gen/gen.dart';
+import 'package:kuner/ui/common/clock/clock_widget.dart';
 import 'package:kuner/ui/common/components/conversion_input.dart';
 import 'package:kuner/ui/common/components/conversion_output.dart';
 import 'package:kuner/ui/common/components/kuner_button.dart';
@@ -32,7 +32,7 @@ class _ConversionScreen extends StatelessWidget {
     return Scaffold(
       body: Column(
         children: [
-          const Text('12:13'),
+          const ClockWidget(),
           const SizedBox(height: 2),
           BlocBuilder<ConversionScreenPresenter, ConversionScreenViewState>(
             builder: (context, state) {
@@ -91,7 +91,7 @@ class _ConversionScreen extends StatelessWidget {
             ),
           ),
           BlocBuilder<ConversionScreenPresenter, ConversionScreenViewState>(builder: (context, state) {
-            if (state.inputValue.whole != 0) {
+            if (state.inputValue != 0) {
               return Padding(
                 padding: const EdgeInsets.only(bottom: 4.0),
                 child: KunerButton(
