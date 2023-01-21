@@ -66,8 +66,11 @@ class _ConversionScreen extends HookWidget {
                       child: BlocBuilder<ConversionScreenPresenter, ConversionScreenViewState>(
                         builder: (context, state) {
                           return GestureDetector(
-                            onTap: () =>
-                                context.read<ConversionScreenPresenter>().add(const ConversionScreenAction.inputTap()),
+                            onTap: state.showDecimal
+                                ? () => context
+                                    .read<ConversionScreenPresenter>()
+                                    .add(const ConversionScreenAction.inputTap())
+                                : null,
                             child: ConversionInput(
                               currency: state.direction.input,
                               decimal: state.showDecimal ? 2 : 0,
