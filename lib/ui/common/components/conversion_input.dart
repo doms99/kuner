@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kuner/ui/common/animated_number_field/animated_number_field.dart';
+import 'package:kuner/ui/common/animated_number_field/number_field_controller.dart';
 import 'package:kuner/ui/common/components/currency_icon.dart';
 import 'package:kuner/ui/common/components/models/currency.dart';
 import 'package:kuner/ui/common/theme/number_theme.dart';
@@ -7,12 +8,14 @@ import 'package:kuner/ui/common/theme/number_theme.dart';
 class ConversionInput extends StatelessWidget {
   const ConversionInput({
     required this.currency,
-    required this.value,
+    this.value = 0.0,
+    this.controller,
     this.showDecimal = true,
     super.key,
   });
 
   final double value;
+  final NumberFieldController? controller;
   final bool showDecimal;
   final Currency currency;
 
@@ -22,6 +25,7 @@ class ConversionInput extends StatelessWidget {
 
     return AnimatedNumberField(
       showDecimal: showDecimal,
+      controller: controller,
       value: value,
       textStyle: themeData.numberTheme.titleLarge!.copyWith(
         color: themeData.colorScheme.surfaceVariant,

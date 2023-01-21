@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kuner/ui/common/animated_number_field/animated_number_field.dart';
+import 'package:kuner/ui/common/animated_number_field/number_field_controller.dart';
 import 'package:kuner/ui/common/components/currency_icon.dart';
 import 'package:kuner/ui/common/components/models/currency.dart';
 import 'package:kuner/ui/common/theme/number_theme.dart';
@@ -7,11 +8,13 @@ import 'package:kuner/ui/common/theme/number_theme.dart';
 class ConversionOutput extends StatelessWidget {
   const ConversionOutput({
     required this.currency,
-    required this.value,
+    this.value = 0.0,
+    this.controller,
     this.showDecimal = true,
     super.key,
   });
 
+  final NumberFieldController? controller;
   final double value;
   final bool showDecimal;
   final Currency currency;
@@ -21,6 +24,8 @@ class ConversionOutput extends StatelessWidget {
     final themeData = Theme.of(context);
 
     return AnimatedNumberField(
+      showDecimal: showDecimal,
+      controller: controller,
       value: value,
       textStyle: themeData.numberTheme.displayLarge!.copyWith(
         color: themeData.colorScheme.onBackground,
@@ -28,7 +33,6 @@ class ConversionOutput extends StatelessWidget {
       decimalTextStyle: themeData.numberTheme.displaySmall!.copyWith(
         color: themeData.colorScheme.onBackground,
       ),
-      showDecimal: showDecimal,
       children: [
         WidgetSpan(
           baseline: TextBaseline.alphabetic,
