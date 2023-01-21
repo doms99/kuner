@@ -58,7 +58,8 @@ class _ConversionRateScreen extends StatelessWidget {
                     children: [
                       const ConversionInput(
                         currency: Currency.eur,
-                        whole: 1,
+                        value: 1,
+                        showDecimal: false,
                       ),
                       const SizedBox(width: 2),
                       Text(
@@ -82,8 +83,7 @@ class _ConversionRateScreen extends StatelessWidget {
                         builder: (context, state) {
                           return ConversionOutput(
                             currency: Currency.hrk,
-                            whole: state.conversionRate.whole,
-                            decimal: state.conversionRate.customDecimal(decimals: 5),
+                            value: state.conversionRate,
                           );
                         },
                       ),

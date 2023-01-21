@@ -59,8 +59,8 @@ class _ConversionScreen extends StatelessWidget {
                               context.read<ConversionScreenPresenter>().add(const ConversionScreenAction.inputTap()),
                           child: ConversionInput(
                             currency: state.direction.input,
-                            whole: state.inputValue.whole,
-                            decimal: state.inputValue.decimal,
+                            showDecimal: true,
+                            value: state.inputValue,
                           ),
                         );
                       },
@@ -79,8 +79,8 @@ class _ConversionScreen extends StatelessWidget {
                         builder: (context, state) {
                           return ConversionOutput(
                             currency: state.direction.output,
-                            whole: state.convertedValue.whole,
-                            decimal: state.showDecimal ? state.convertedValue.decimal : null,
+                            value: state.convertedValue,
+                            showDecimal: state.showDecimal,
                           );
                         },
                       ),
