@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:kuner/common/util/separate_double.dart';
 import 'package:kuner/gen/gen.dart';
 import 'package:kuner/ui/common/animated_number_field/use_number_field.dart';
 import 'package:kuner/ui/common/clock/clock_widget.dart';
