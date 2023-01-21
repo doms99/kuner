@@ -20,18 +20,21 @@ mixin _$ConversionScreenAction {
   TResult when<TResult extends Object?>({
     required TResult Function() conversionTogglePressed,
     required TResult Function(double value) newInputValue,
+    required TResult Function() inputTap,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? conversionTogglePressed,
     TResult Function(double value)? newInputValue,
+    TResult Function()? inputTap,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? conversionTogglePressed,
     TResult Function(double value)? newInputValue,
+    TResult Function()? inputTap,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -40,18 +43,21 @@ mixin _$ConversionScreenAction {
     required TResult Function(ConversionTogglePressed value)
         conversionTogglePressed,
     required TResult Function(NewInputValue value) newInputValue,
+    required TResult Function(InputTap value) inputTap,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(ConversionTogglePressed value)? conversionTogglePressed,
     TResult Function(NewInputValue value)? newInputValue,
+    TResult Function(InputTap value)? inputTap,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(ConversionTogglePressed value)? conversionTogglePressed,
     TResult Function(NewInputValue value)? newInputValue,
+    TResult Function(InputTap value)? inputTap,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -119,6 +125,7 @@ class _$ConversionTogglePressed implements ConversionTogglePressed {
   TResult when<TResult extends Object?>({
     required TResult Function() conversionTogglePressed,
     required TResult Function(double value) newInputValue,
+    required TResult Function() inputTap,
   }) {
     return conversionTogglePressed();
   }
@@ -128,6 +135,7 @@ class _$ConversionTogglePressed implements ConversionTogglePressed {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? conversionTogglePressed,
     TResult Function(double value)? newInputValue,
+    TResult Function()? inputTap,
   }) {
     return conversionTogglePressed?.call();
   }
@@ -137,6 +145,7 @@ class _$ConversionTogglePressed implements ConversionTogglePressed {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? conversionTogglePressed,
     TResult Function(double value)? newInputValue,
+    TResult Function()? inputTap,
     required TResult orElse(),
   }) {
     if (conversionTogglePressed != null) {
@@ -151,6 +160,7 @@ class _$ConversionTogglePressed implements ConversionTogglePressed {
     required TResult Function(ConversionTogglePressed value)
         conversionTogglePressed,
     required TResult Function(NewInputValue value) newInputValue,
+    required TResult Function(InputTap value) inputTap,
   }) {
     return conversionTogglePressed(this);
   }
@@ -160,6 +170,7 @@ class _$ConversionTogglePressed implements ConversionTogglePressed {
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(ConversionTogglePressed value)? conversionTogglePressed,
     TResult Function(NewInputValue value)? newInputValue,
+    TResult Function(InputTap value)? inputTap,
   }) {
     return conversionTogglePressed?.call(this);
   }
@@ -169,6 +180,7 @@ class _$ConversionTogglePressed implements ConversionTogglePressed {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(ConversionTogglePressed value)? conversionTogglePressed,
     TResult Function(NewInputValue value)? newInputValue,
+    TResult Function(InputTap value)? inputTap,
     required TResult orElse(),
   }) {
     if (conversionTogglePressed != null) {
@@ -249,6 +261,7 @@ class _$NewInputValue implements NewInputValue {
   TResult when<TResult extends Object?>({
     required TResult Function() conversionTogglePressed,
     required TResult Function(double value) newInputValue,
+    required TResult Function() inputTap,
   }) {
     return newInputValue(value);
   }
@@ -258,6 +271,7 @@ class _$NewInputValue implements NewInputValue {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? conversionTogglePressed,
     TResult Function(double value)? newInputValue,
+    TResult Function()? inputTap,
   }) {
     return newInputValue?.call(value);
   }
@@ -267,6 +281,7 @@ class _$NewInputValue implements NewInputValue {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? conversionTogglePressed,
     TResult Function(double value)? newInputValue,
+    TResult Function()? inputTap,
     required TResult orElse(),
   }) {
     if (newInputValue != null) {
@@ -281,6 +296,7 @@ class _$NewInputValue implements NewInputValue {
     required TResult Function(ConversionTogglePressed value)
         conversionTogglePressed,
     required TResult Function(NewInputValue value) newInputValue,
+    required TResult Function(InputTap value) inputTap,
   }) {
     return newInputValue(this);
   }
@@ -290,6 +306,7 @@ class _$NewInputValue implements NewInputValue {
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(ConversionTogglePressed value)? conversionTogglePressed,
     TResult Function(NewInputValue value)? newInputValue,
+    TResult Function(InputTap value)? inputTap,
   }) {
     return newInputValue?.call(this);
   }
@@ -299,6 +316,7 @@ class _$NewInputValue implements NewInputValue {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(ConversionTogglePressed value)? conversionTogglePressed,
     TResult Function(NewInputValue value)? newInputValue,
+    TResult Function(InputTap value)? inputTap,
     required TResult orElse(),
   }) {
     if (newInputValue != null) {
@@ -315,4 +333,115 @@ abstract class NewInputValue implements ConversionScreenAction {
   @JsonKey(ignore: true)
   _$$NewInputValueCopyWith<_$NewInputValue> get copyWith =>
       throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$InputTapCopyWith<$Res> {
+  factory _$$InputTapCopyWith(
+          _$InputTap value, $Res Function(_$InputTap) then) =
+      __$$InputTapCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$InputTapCopyWithImpl<$Res>
+    extends _$ConversionScreenActionCopyWithImpl<$Res>
+    implements _$$InputTapCopyWith<$Res> {
+  __$$InputTapCopyWithImpl(_$InputTap _value, $Res Function(_$InputTap) _then)
+      : super(_value, (v) => _then(v as _$InputTap));
+
+  @override
+  _$InputTap get _value => super._value as _$InputTap;
+}
+
+/// @nodoc
+
+class _$InputTap implements InputTap {
+  const _$InputTap();
+
+  @override
+  String toString() {
+    return 'ConversionScreenAction.inputTap()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$InputTap);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() conversionTogglePressed,
+    required TResult Function(double value) newInputValue,
+    required TResult Function() inputTap,
+  }) {
+    return inputTap();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? conversionTogglePressed,
+    TResult Function(double value)? newInputValue,
+    TResult Function()? inputTap,
+  }) {
+    return inputTap?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? conversionTogglePressed,
+    TResult Function(double value)? newInputValue,
+    TResult Function()? inputTap,
+    required TResult orElse(),
+  }) {
+    if (inputTap != null) {
+      return inputTap();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(ConversionTogglePressed value)
+        conversionTogglePressed,
+    required TResult Function(NewInputValue value) newInputValue,
+    required TResult Function(InputTap value) inputTap,
+  }) {
+    return inputTap(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(ConversionTogglePressed value)? conversionTogglePressed,
+    TResult Function(NewInputValue value)? newInputValue,
+    TResult Function(InputTap value)? inputTap,
+  }) {
+    return inputTap?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(ConversionTogglePressed value)? conversionTogglePressed,
+    TResult Function(NewInputValue value)? newInputValue,
+    TResult Function(InputTap value)? inputTap,
+    required TResult orElse(),
+  }) {
+    if (inputTap != null) {
+      return inputTap(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class InputTap implements ConversionScreenAction {
+  const factory InputTap() = _$InputTap;
 }

@@ -54,10 +54,14 @@ class _ConversionScreen extends StatelessWidget {
                     padding: const EdgeInsets.only(left: 16.0),
                     child: BlocBuilder<ConversionScreenPresenter, ConversionScreenViewState>(
                       builder: (context, state) {
-                        return ConversionInput(
-                          currency: state.direction.input,
-                          whole: state.inputValue.whole,
-                          // decimal: state.inputValue.decimal,
+                        return GestureDetector(
+                          onTap: () =>
+                              context.read<ConversionScreenPresenter>().add(const ConversionScreenAction.inputTap()),
+                          child: ConversionInput(
+                            currency: state.direction.input,
+                            whole: state.inputValue.whole,
+                            decimal: state.inputValue.decimal,
+                          ),
                         );
                       },
                     ),
