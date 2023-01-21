@@ -10,13 +10,13 @@ class ConversionOutput extends StatelessWidget {
     required this.currency,
     this.value = 0.0,
     this.controller,
-    this.showDecimal = true,
+    this.decimal = 2,
     super.key,
   });
 
   final NumberFieldController? controller;
   final double value;
-  final bool showDecimal;
+  final int decimal;
   final Currency currency;
 
   @override
@@ -24,7 +24,7 @@ class ConversionOutput extends StatelessWidget {
     final themeData = Theme.of(context);
 
     return AnimatedNumberField(
-      showDecimal: showDecimal,
+      decimal: decimal,
       controller: controller,
       value: value,
       textStyle: themeData.numberTheme.displayLarge!.copyWith(

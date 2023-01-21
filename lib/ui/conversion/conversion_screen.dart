@@ -70,7 +70,7 @@ class _ConversionScreen extends HookWidget {
                                 context.read<ConversionScreenPresenter>().add(const ConversionScreenAction.inputTap()),
                             child: ConversionInput(
                               currency: state.direction.input,
-                              showDecimal: true,
+                              decimal: state.showDecimal ? 2 : 0,
                               controller: inputController,
                             ),
                           );
@@ -91,7 +91,7 @@ class _ConversionScreen extends HookWidget {
                             return ConversionOutput(
                               currency: state.direction.output,
                               controller: outputController,
-                              showDecimal: state.showDecimal,
+                              decimal: state.showDecimal ? 2 : 0,
                             );
                           },
                         ),

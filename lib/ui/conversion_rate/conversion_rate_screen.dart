@@ -1,9 +1,7 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:kuner/common/util/separate_double.dart';
 import 'package:kuner/ui/common/components/conversion_input.dart';
 import 'package:kuner/ui/common/components/conversion_output.dart';
 import 'package:kuner/ui/common/components/kuner_button.dart';
@@ -60,7 +58,7 @@ class _ConversionRateScreen extends StatelessWidget {
                       const ConversionInput(
                         currency: Currency.eur,
                         value: 1,
-                        showDecimal: false,
+                        decimal: 0,
                       ),
                       const SizedBox(width: 2),
                       Text(
@@ -85,6 +83,7 @@ class _ConversionRateScreen extends StatelessWidget {
                           return ConversionOutput(
                             currency: Currency.hrk,
                             value: state.conversionRate,
+                            decimal: 5,
                           );
                         },
                       ),

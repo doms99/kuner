@@ -9,7 +9,7 @@ class NewValueProps {
 }
 
 class NumberFieldController extends ValueNotifier<NewValueProps> {
-  NumberFieldController({double initialValue = 0}) : super(NewValueProps(0, false));
+  NumberFieldController({double initialValue = 0}) : super(NewValueProps(initialValue, false));
 
   void setValue(double value, {bool animated = true}) {
     super.value = NewValueProps(value, animated);

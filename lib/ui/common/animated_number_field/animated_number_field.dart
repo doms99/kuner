@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 import 'package:kuner/common/util/separate_double.dart';
 import 'package:kuner/ui/common/animated_number_field/number_field_controller.dart';
@@ -8,7 +6,7 @@ class AnimatedNumberField extends StatefulWidget {
   const AnimatedNumberField({
     this.decimalTextStyle,
     this.textStyle,
-    this.showDecimal = true,
+    this.decimal = 2,
     this.controller,
     required this.children,
     this.value = 0.0,
@@ -17,7 +15,7 @@ class AnimatedNumberField extends StatefulWidget {
 
   final NumberFieldController? controller;
   final double value;
-  final bool showDecimal;
+  final int decimal;
   final TextStyle? textStyle;
   final TextStyle? decimalTextStyle;
   final List<InlineSpan> children;
@@ -34,15 +32,18 @@ class _AnimatedNumberFieldState extends State<AnimatedNumberField> with SingleTi
   late int _whole;
   late int _decimal;
 
+  bool get _showDecimal => widget.decimal != 0;
+
   @override
   void initState() {
     super.initState();
     _fieldController = widget.controller ?? NumberFieldController(initialValue: widget.value);
-    _whole = _fieldController.value.value.whole;
-    _decimal = widget.showDecimal ? _fieldController.value.value.decimal : 0;
+    _whole = _lastWhole = _fieldController.value.value.whole;
+    _decimal = _lastDecimal = _showDecimal ? _fieldController.value.value.customDecimal(decimals: widget.decimal) : 0;
     _controller = AnimationController(
       vsync: this,
       duration: const Duration(milliseconds: 250),
+      value: 1,
     );
     _controller.addListener(_animationControllerListener);
     _fieldController.addListener(_fieldControllerListener);
@@ -74,7 +75,7 @@ class _AnimatedNumberFieldState extends State<AnimatedNumberField> with SingleTi
 
   void _fieldControllerListener() {
     _whole = _fieldController.value.value.whole;
-    _decimal = widget.showDecimal ? _fieldController.value.value.decimal : 0;
+    _decimal = _showDecimal ? _fieldController.value.value.customDecimal(decimals: widget.decimal) : 0;
 
     if (_fieldController.value.animated) {
       _controller.reset();
@@ -95,14 +96,16 @@ class _AnimatedNumberFieldState extends State<AnimatedNumberField> with SingleTi
           final whole = IntTween(begin: _lastWhole, end: _whole).evaluate(_controller);
           final decimal = IntTween(begin: _lastDecimal, end: _decimal).evaluate(_controller);
 
+          final decimalString = decimal == 0 ? '0' : decimal.toString().padLeft(widget.decimal, '0');
+
           return RichText(
             text: TextSpan(
               style: widget.textStyle,
               children: [
                 TextSpan(text: '$whole'),
-                if (widget.showDecimal)
+                if (_showDecimal)
                   TextSpan(
-                    text: '.$decimal',
+                    text: '.$decimalString',
                     style: widget.decimalTextStyle,
                   ),
                 ...widget.children,
