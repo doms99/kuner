@@ -91,22 +91,28 @@ class _ConversionScreen extends StatelessWidget {
             ),
           ),
           BlocBuilder<ConversionScreenPresenter, ConversionScreenViewState>(builder: (context, state) {
-            if (state.inputValue != 0) {
-              return Padding(
-                padding: const EdgeInsets.only(bottom: 4.0),
-                child: KunerButton(
-                  onPressed: () =>
-                      context.read<ConversionScreenPresenter>().add(const ConversionScreenAction.newInputValue(0)),
-                  padding: const EdgeInsets.all(8),
-                  child: SvgPicture.asset(
-                    Assets.svgs.reset,
-                    color: Theme.of(context).colorScheme.onSecondary,
+            return IgnorePointer(
+              ignoring: state.inputValue == 0,
+              child: AnimatedScale(
+                duration: const Duration(milliseconds: 100),
+                scale: state.inputValue == 0 ? 0 : 1,
+                curve: Curves.easeOut,
+                child: Padding(
+                  padding: const EdgeInsets.only(bottom: 4.0),
+                  child: KunerButton(
+                    onPressed: () =>
+                        context.read<ConversionScreenPresenter>().add(const ConversionScreenAction.newInputValue(0)),
+                    padding: const EdgeInsets.all(8),
+                    child: SvgPicture.asset(
+                      Assets.svgs.reset,
+                      color: Theme.of(context).colorScheme.onSecondary,
+                    ),
                   ),
                 ),
-              );
-            }
+              ),
+            );
 
-            return const SizedBox(height: 34 + 4);
+            // return const SizedBox(height: 34 + 4);
           }),
           const SizedBox(height: 16),
         ],
