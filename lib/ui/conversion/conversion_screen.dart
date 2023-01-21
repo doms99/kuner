@@ -1,8 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:kuner/common/util/separate_double.dart';
+import 'package:kuner/gen/gen.dart';
 import 'package:kuner/ui/common/components/conversion_input.dart';
 import 'package:kuner/ui/common/components/conversion_output.dart';
+import 'package:kuner/ui/common/components/kuner_button.dart';
 import 'package:kuner/ui/common/components/kuner_conversion_toggle.dart';
 import 'package:kuner/ui/conversion/presenter/conversion_screen_action.dart';
 import 'package:kuner/ui/conversion/presenter/conversion_screen_presenter.dart';
@@ -83,7 +86,25 @@ class _ConversionScreen extends StatelessWidget {
               ],
             ),
           ),
-          const SizedBox(height: 34),
+          BlocBuilder<ConversionScreenPresenter, ConversionScreenViewState>(builder: (context, state) {
+            if (state.inputValue.whole != 0) {
+              return Padding(
+                padding: const EdgeInsets.only(bottom: 4.0),
+                child: KunerButton(
+                  onPressed: () =>
+                      context.read<ConversionScreenPresenter>().add(const ConversionScreenAction.newInputValue(0)),
+                  padding: const EdgeInsets.all(8),
+                  child: SvgPicture.asset(
+                    Assets.svgs.reset,
+                    color: Theme.of(context).colorScheme.onSecondary,
+                  ),
+                ),
+              );
+            }
+
+            return const SizedBox(height: 34 + 4);
+          }),
+          const SizedBox(height: 16),
         ],
       ),
     );

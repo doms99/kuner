@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:kuner/device/model/conversion_rate_holder.dart';
 import 'package:kuner/ui/common/components/kuner_button.dart';
 import 'package:kuner/ui/conversion_rate/conversion_rate_screen.dart';
 import 'package:kuner/ui/settings/settings_screen.dart';
