@@ -2,18 +2,13 @@ package com.example.kuner
 
 import android.content.Context
 import android.os.Bundle
-import android.os.PersistableBundle
 import android.os.Vibrator
 import android.view.InputDevice
 import android.view.MotionEvent
-import android.view.View
 import androidx.core.view.MotionEventCompat
-import androidx.viewpager.widget.ViewPager
-import androidx.wear.widget.SwipeDismissFrameLayout
 import io.flutter.embedding.android.FlutterActivity
 import io.flutter.embedding.engine.FlutterEngine
 import io.flutter.plugin.common.EventChannel
-import java.lang.Exception
 
 class MainActivity: FlutterActivity() {
   private val CHANNEL = "main-channel"
@@ -28,6 +23,15 @@ class MainActivity: FlutterActivity() {
     EventChannel(flutterEngine.dartExecutor.binaryMessenger, CHANNEL)
       .setStreamHandler(RotaryStreamHandler(this))
   }
+
+  override fun onCreate(savedInstanceState: Bundle?) {
+    super.onCreate(savedInstanceState)
+    setContentView(createFlutterView())
+
+    configureStatusBarForFullscreenFlutterExperience()
+  }
+
+
 
   private class RotaryStreamHandler(private val mainActivity: MainActivity): EventChannel.StreamHandler {
     override fun onListen(arguments: Any?, events: EventChannel.EventSink?) {
