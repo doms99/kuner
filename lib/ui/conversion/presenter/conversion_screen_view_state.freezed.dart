@@ -20,6 +20,7 @@ mixin _$ConversionScreenViewState {
   ConversionDirection get direction => throw _privateConstructorUsedError;
   double get inputValue => throw _privateConstructorUsedError;
   double get convertedValue => throw _privateConstructorUsedError;
+  bool get animate => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $ConversionScreenViewStateCopyWith<ConversionScreenViewState> get copyWith =>
@@ -35,7 +36,8 @@ abstract class $ConversionScreenViewStateCopyWith<$Res> {
       {bool showDecimal,
       ConversionDirection direction,
       double inputValue,
-      double convertedValue});
+      double convertedValue,
+      bool animate});
 }
 
 /// @nodoc
@@ -53,6 +55,7 @@ class _$ConversionScreenViewStateCopyWithImpl<$Res>
     Object? direction = freezed,
     Object? inputValue = freezed,
     Object? convertedValue = freezed,
+    Object? animate = freezed,
   }) {
     return _then(_value.copyWith(
       showDecimal: showDecimal == freezed
@@ -71,6 +74,10 @@ class _$ConversionScreenViewStateCopyWithImpl<$Res>
           ? _value.convertedValue
           : convertedValue // ignore: cast_nullable_to_non_nullable
               as double,
+      animate: animate == freezed
+          ? _value.animate
+          : animate // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -87,7 +94,8 @@ abstract class _$$_ConversionScreenViewStateCopyWith<$Res>
       {bool showDecimal,
       ConversionDirection direction,
       double inputValue,
-      double convertedValue});
+      double convertedValue,
+      bool animate});
 }
 
 /// @nodoc
@@ -109,6 +117,7 @@ class __$$_ConversionScreenViewStateCopyWithImpl<$Res>
     Object? direction = freezed,
     Object? inputValue = freezed,
     Object? convertedValue = freezed,
+    Object? animate = freezed,
   }) {
     return _then(_$_ConversionScreenViewState(
       showDecimal: showDecimal == freezed
@@ -127,6 +136,10 @@ class __$$_ConversionScreenViewStateCopyWithImpl<$Res>
           ? _value.convertedValue
           : convertedValue // ignore: cast_nullable_to_non_nullable
               as double,
+      animate: animate == freezed
+          ? _value.animate
+          : animate // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -138,7 +151,8 @@ class _$_ConversionScreenViewState extends _ConversionScreenViewState {
       {required this.showDecimal,
       required this.direction,
       required this.inputValue,
-      required this.convertedValue})
+      required this.convertedValue,
+      required this.animate})
       : super._();
 
   @override
@@ -149,10 +163,12 @@ class _$_ConversionScreenViewState extends _ConversionScreenViewState {
   final double inputValue;
   @override
   final double convertedValue;
+  @override
+  final bool animate;
 
   @override
   String toString() {
-    return 'ConversionScreenViewState(showDecimal: $showDecimal, direction: $direction, inputValue: $inputValue, convertedValue: $convertedValue)';
+    return 'ConversionScreenViewState(showDecimal: $showDecimal, direction: $direction, inputValue: $inputValue, convertedValue: $convertedValue, animate: $animate)';
   }
 
   @override
@@ -166,7 +182,8 @@ class _$_ConversionScreenViewState extends _ConversionScreenViewState {
             const DeepCollectionEquality()
                 .equals(other.inputValue, inputValue) &&
             const DeepCollectionEquality()
-                .equals(other.convertedValue, convertedValue));
+                .equals(other.convertedValue, convertedValue) &&
+            const DeepCollectionEquality().equals(other.animate, animate));
   }
 
   @override
@@ -175,7 +192,8 @@ class _$_ConversionScreenViewState extends _ConversionScreenViewState {
       const DeepCollectionEquality().hash(showDecimal),
       const DeepCollectionEquality().hash(direction),
       const DeepCollectionEquality().hash(inputValue),
-      const DeepCollectionEquality().hash(convertedValue));
+      const DeepCollectionEquality().hash(convertedValue),
+      const DeepCollectionEquality().hash(animate));
 
   @JsonKey(ignore: true)
   @override
@@ -189,7 +207,8 @@ abstract class _ConversionScreenViewState extends ConversionScreenViewState {
       {required final bool showDecimal,
       required final ConversionDirection direction,
       required final double inputValue,
-      required final double convertedValue}) = _$_ConversionScreenViewState;
+      required final double convertedValue,
+      required final bool animate}) = _$_ConversionScreenViewState;
   const _ConversionScreenViewState._() : super._();
 
   @override
@@ -200,6 +219,8 @@ abstract class _ConversionScreenViewState extends ConversionScreenViewState {
   double get inputValue;
   @override
   double get convertedValue;
+  @override
+  bool get animate;
   @override
   @JsonKey(ignore: true)
   _$$_ConversionScreenViewStateCopyWith<_$_ConversionScreenViewState>

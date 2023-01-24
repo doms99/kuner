@@ -7,4 +7,5 @@ class ConversionScreenAction with _$ConversionScreenAction {
   const factory ConversionScreenAction.conversionTogglePressed() = ConversionTogglePressed;
   const factory ConversionScreenAction.newInputValue(double value) = NewInputValue;
   const factory ConversionScreenAction.inputTap() = InputTap;
+  const factory ConversionScreenAction.reset() = Reset;
 }
