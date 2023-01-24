@@ -1,7 +1,7 @@
 import 'dart:math';
 
 extension SeparateDouble on double {
-  int get whole => ceil() - this < 0.000001 ? ceil() : floor().toInt();
+  int get whole => ceil() - this < 0.000001 ? ceil() : floor();
 
   int get decimal => customDecimal(decimals: 2);
 
