@@ -2,9 +2,11 @@ import 'dart:async';
 import 'dart:math';
 
 import 'package:bloc/bloc.dart';
+import 'package:kuner/common/debouncer.dart';
 import 'package:kuner/common/util/speed_calculator.dart';
 import 'package:kuner/device/interactor/conversion/conversion_interactor.dart';
 import 'package:kuner/device/manager/rotary_manager.dart';
+import 'package:kuner/device/model/conversion_state.dart';
 import 'package:kuner/device/model/settings_holder.dart';
 import 'package:kuner/ui/conversion/presenter/conversion_screen_action.dart';
 import 'package:kuner/ui/conversion/presenter/conversion_screen_view_state.dart';
@@ -25,6 +27,8 @@ class ConversionScreenPresenter extends Bloc<Event, State> {
       event.when(
         conversionTogglePressed: () => _onConversionTogglePressed(completer),
         newInputValue: (value) => _onNewInputValue(value, completer),
+        inputTap: () => _onInputValueTap(completer),
+        reset: () => _onReset(completer),
       );
 
       emit(await completer.future);
@@ -33,6 +37,7 @@ class ConversionScreenPresenter extends Bloc<Event, State> {
   }
 
   final ConversionInteractor _conversionInteractor;
+  final Debouncer _debouncer = Debouncer(const Duration(milliseconds: 500));
 
   late final StreamSubscription _subscription;
 
@@ -78,7 +83,7 @@ class ConversionScreenPresenter extends Bloc<Event, State> {
       convertedValue: _conversionInteractor.convert(state.convertedValue.roundToDouble(), direction: flipDirection),
     );
 
-    _conversionInteractor.saveState(newState.toConversionState());
+    _saveToSharedPrefs(newState.toConversionState());
 
     completer.complete(newState);
   }
@@ -87,11 +92,40 @@ class ConversionScreenPresenter extends Bloc<Event, State> {
     final newState = state.copyWith(
       inputValue: value,
       convertedValue: _conversionInteractor.convert(value, direction: state.direction),
+      animate: false,
     );
 
-    _conversionInteractor.saveState(newState.toConversionState());
+    _saveToSharedPrefs(newState.toConversionState());
 
     completer.complete(newState);
+  }
+
+  void _onInputValueTap(Completer<State> completer) {
+    final newState = state.copyWith(
+      inputValue: state.inputValue + 0.1,
+      convertedValue: _conversionInteractor.convert(state.inputValue + 0.1, direction: state.direction),
+      animate: true,
+    );
+
+    _saveToSharedPrefs(newState.toConversionState());
+
+    completer.complete(newState);
+  }
+
+  void _onReset(Completer<State> completer) {
+    final newState = state.copyWith(
+      inputValue: 0,
+      convertedValue: 0,
+      animate: true,
+    );
+
+    _saveToSharedPrefs(newState.toConversionState());
+
+    completer.complete(newState);
+  }
+
+  void _saveToSharedPrefs(ConversionState state) {
+    _debouncer.run(() => _conversionInteractor.saveState(state));
   }
 
   @override

@@ -1,8 +1,7 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:kuner/common/util/separate_double.dart';
 import 'package:kuner/ui/common/components/conversion_input.dart';
 import 'package:kuner/ui/common/components/conversion_output.dart';
 import 'package:kuner/ui/common/components/kuner_button.dart';
@@ -14,7 +13,7 @@ import 'package:kuner/ui/conversion_rate/presenter/conversion_rate_bloc_widget.d
 
 import 'package:kuner/gen/assets.gen.dart';
 
-class ConversionRateScreen extends StatelessWidget {
+class ConversionRateScreen extends HookWidget {
   const ConversionRateScreen({super.key});
 
   static Route route() {
@@ -58,7 +57,8 @@ class _ConversionRateScreen extends StatelessWidget {
                     children: [
                       const ConversionInput(
                         currency: Currency.eur,
-                        whole: 1,
+                        value: 1,
+                        decimal: 0,
                       ),
                       const SizedBox(width: 2),
                       Text(
@@ -82,8 +82,8 @@ class _ConversionRateScreen extends StatelessWidget {
                         builder: (context, state) {
                           return ConversionOutput(
                             currency: Currency.hrk,
-                            whole: state.conversionRate.whole,
-                            decimal: state.conversionRate.customDecimal(decimals: 5),
+                            value: state.conversionRate,
+                            decimal: 5,
                           );
                         },
                       ),

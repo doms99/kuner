@@ -7,9 +7,9 @@ enum Speed {
   double get milliseconds {
     switch (this) {
       case Speed.slow:
-        return 250;
+        return 200;
       case Speed.medium:
-        return 125;
+        return 100;
       case Speed.fast:
         return 25;
       case Speed.veryFast:

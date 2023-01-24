@@ -14,6 +14,7 @@ class ConversionScreenViewState with _$ConversionScreenViewState {
     required ConversionDirection direction,
     required double inputValue,
     required double convertedValue,
+    required bool animate,
   }) = _ConversionScreenViewState;
 
   factory ConversionScreenViewState.fromConversionState(ConversionState state, {required bool showDecimal}) {
@@ -22,6 +23,7 @@ class ConversionScreenViewState with _$ConversionScreenViewState {
       direction: state.conversionDirection,
       inputValue: state.inputValue,
       convertedValue: state.outputValue,
+      animate: false,
     );
   }
 
