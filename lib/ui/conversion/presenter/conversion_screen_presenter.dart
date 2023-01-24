@@ -27,7 +27,8 @@ class ConversionScreenPresenter extends Bloc<Event, State> {
       event.when(
         conversionTogglePressed: () => _onConversionTogglePressed(completer),
         newInputValue: (value) => _onNewInputValue(value, completer),
-        inputTap: () => _onNewInputValue(state.inputValue + 0.1, completer),
+        inputTap: () => _onInputValueTap(completer),
+        reset: () => _onReset(completer),
       );
 
       emit(await completer.future);
@@ -91,6 +92,31 @@ class ConversionScreenPresenter extends Bloc<Event, State> {
     final newState = state.copyWith(
       inputValue: value,
       convertedValue: _conversionInteractor.convert(value, direction: state.direction),
+      animate: false,
+    );
+
+    _saveToSharedPrefs(newState.toConversionState());
+
+    completer.complete(newState);
+  }
+
+  void _onInputValueTap(Completer<State> completer) {
+    final newState = state.copyWith(
+      inputValue: state.inputValue + 0.1,
+      convertedValue: _conversionInteractor.convert(state.inputValue + 0.1, direction: state.direction),
+      animate: true,
+    );
+
+    _saveToSharedPrefs(newState.toConversionState());
+
+    completer.complete(newState);
+  }
+
+  void _onReset(Completer<State> completer) {
+    final newState = state.copyWith(
+      inputValue: 0,
+      convertedValue: 0,
+      animate: true,
     );
 
     _saveToSharedPrefs(newState.toConversionState());
