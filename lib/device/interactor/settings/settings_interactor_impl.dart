@@ -1,8 +1,8 @@
 import 'package:kuner/app/constants.dart';
 import 'package:kuner/device/interactor/settings/setting_interactor.dart';
 import 'package:kuner/device/manager/shared_preferences.dart';
-import 'package:kuner/device/model/settings.dart';
-import 'package:kuner/device/model/settings_holder.dart';
+import 'package:kuner/device/models/settings.dart';
+import 'package:kuner/device/models/settings_holder.dart';
 
 class SettingsInteractorImpl implements SettingsInteractor {
   SettingsInteractorImpl(this._settingsHolder, this._sharedPreferences);

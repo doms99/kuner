@@ -1,6 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'settings.freezed.dart';
+part './settings.freezed.dart';
 
 @freezed
 class Settings with _$Settings {
