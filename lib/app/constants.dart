@@ -1,3 +1,5 @@
+import 'package:flutter/gestures.dart';
+
 class Constants {
   Constants._();
 
@@ -17,4 +19,11 @@ class StorageConstants {
   static const directionKey = 'direction-key';
   static const inputKey = 'input-key';
   static const outputKey = 'output-key';
+}
+
+class API {
+  API._();
+
+  static const String baseURL = 'https://api.exchangeratesapi.io';
+  static String convert()
 }
