@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
-part of 'settings_screen_action.dart';
+part of 'settings_screen_event.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -15,7 +15,7 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
-mixin _$SettingsScreenAction {
+mixin _$SettingsScreenEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() toggle,
@@ -51,20 +51,20 @@ mixin _$SettingsScreenAction {
 }
 
 /// @nodoc
-abstract class $SettingsScreenActionCopyWith<$Res> {
-  factory $SettingsScreenActionCopyWith(SettingsScreenAction value,
-          $Res Function(SettingsScreenAction) then) =
-      _$SettingsScreenActionCopyWithImpl<$Res>;
+abstract class $SettingsScreenEventCopyWith<$Res> {
+  factory $SettingsScreenEventCopyWith(
+          SettingsScreenEvent value, $Res Function(SettingsScreenEvent) then) =
+      _$SettingsScreenEventCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class _$SettingsScreenActionCopyWithImpl<$Res>
-    implements $SettingsScreenActionCopyWith<$Res> {
-  _$SettingsScreenActionCopyWithImpl(this._value, this._then);
+class _$SettingsScreenEventCopyWithImpl<$Res>
+    implements $SettingsScreenEventCopyWith<$Res> {
+  _$SettingsScreenEventCopyWithImpl(this._value, this._then);
 
-  final SettingsScreenAction _value;
+  final SettingsScreenEvent _value;
   // ignore: unused_field
-  final $Res Function(SettingsScreenAction) _then;
+  final $Res Function(SettingsScreenEvent) _then;
 }
 
 /// @nodoc
@@ -75,7 +75,7 @@ abstract class _$$ToggleCopyWith<$Res> {
 
 /// @nodoc
 class __$$ToggleCopyWithImpl<$Res>
-    extends _$SettingsScreenActionCopyWithImpl<$Res>
+    extends _$SettingsScreenEventCopyWithImpl<$Res>
     implements _$$ToggleCopyWith<$Res> {
   __$$ToggleCopyWithImpl(_$Toggle _value, $Res Function(_$Toggle) _then)
       : super(_value, (v) => _then(v as _$Toggle));
@@ -91,7 +91,7 @@ class _$Toggle implements Toggle {
 
   @override
   String toString() {
-    return 'SettingsScreenAction.toggle()';
+    return 'SettingsScreenEvent.toggle()';
   }
 
   @override
@@ -160,6 +160,6 @@ class _$Toggle implements Toggle {
   }
 }
 
-abstract class Toggle implements SettingsScreenAction {
+abstract class Toggle implements SettingsScreenEvent {
   const factory Toggle() = _$Toggle;
 }

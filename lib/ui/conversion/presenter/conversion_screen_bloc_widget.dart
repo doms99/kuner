@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
-import 'package:kuner/ui/conversion/presenter/conversion_screen_presenter.dart';
+import 'package:kuner/ui/conversion/presenter/conversion_screen_bloc.dart';
 
-class ConversionScreenPresenterWidget extends StatelessWidget {
-  const ConversionScreenPresenterWidget({
+class ConversionScreenBlocWidget extends StatelessWidget {
+  const ConversionScreenBlocWidget({
     required this.child,
     super.key,
   });
@@ -14,7 +14,7 @@ class ConversionScreenPresenterWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => ConversionScreenPresenter(
+      create: (context) => ConversionScreenBloc(
         GetIt.I.get(),
         GetIt.I.get(),
         GetIt.I.get(),

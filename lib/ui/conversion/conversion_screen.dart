@@ -8,9 +8,9 @@ import 'package:kuner/ui/common/components/conversion_input.dart';
 import 'package:kuner/ui/common/components/conversion_output.dart';
 import 'package:kuner/ui/common/components/kuner_button.dart';
 import 'package:kuner/ui/common/components/kuner_conversion_toggle.dart';
-import 'package:kuner/ui/conversion/presenter/conversion_screen_action.dart';
-import 'package:kuner/ui/conversion/presenter/conversion_screen_presenter.dart';
-import 'package:kuner/ui/conversion/presenter/conversion_screen_presenter_widget.dart';
+import 'package:kuner/ui/conversion/presenter/conversion_screen_event.dart';
+import 'package:kuner/ui/conversion/presenter/conversion_screen_bloc.dart';
+import 'package:kuner/ui/conversion/presenter/conversion_screen_bloc_widget.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kuner/ui/conversion/presenter/conversion_screen_view_state.dart';
 
@@ -19,7 +19,7 @@ class ConversionScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const ConversionScreenPresenterWidget(
+    return const ConversionScreenBlocWidget(
       child: _ConversionScreen(),
     );
   }
@@ -30,11 +30,10 @@ class _ConversionScreen extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final inputController = useNumberField(initialValue: context.read<ConversionScreenPresenter>().state.inputValue);
-    final outputController =
-        useNumberField(initialValue: context.read<ConversionScreenPresenter>().state.convertedValue);
+    final inputController = useNumberField(initialValue: context.read<ConversionScreenBloc>().state.inputValue);
+    final outputController = useNumberField(initialValue: context.read<ConversionScreenBloc>().state.convertedValue);
 
-    return BlocListener<ConversionScreenPresenter, ConversionScreenViewState>(
+    return BlocListener<ConversionScreenBloc, ConversionScreenViewState>(
       listener: (context, state) {
         inputController.setValue(state.inputValue, animated: state.animate);
         outputController.setValue(state.convertedValue, animated: state.animate);
@@ -44,12 +43,12 @@ class _ConversionScreen extends HookWidget {
           children: [
             const ClockWidget(),
             const SizedBox(height: 2),
-            BlocBuilder<ConversionScreenPresenter, ConversionScreenViewState>(
+            BlocBuilder<ConversionScreenBloc, ConversionScreenViewState>(
               builder: (context, state) {
                 return KunerConversionToggle(
                   direction: state.direction,
-                  onPressed: () => context.read<ConversionScreenPresenter>().add(
-                        const ConversionScreenAction.conversionTogglePressed(),
+                  onPressed: () => context.read<ConversionScreenBloc>().add(
+                        const ConversionScreenEvent.conversionTogglePressed(),
                       ),
                 );
               },
@@ -62,13 +61,11 @@ class _ConversionScreen extends HookWidget {
                     alignment: Alignment.centerLeft,
                     child: Padding(
                       padding: const EdgeInsets.only(left: 16.0),
-                      child: BlocBuilder<ConversionScreenPresenter, ConversionScreenViewState>(
+                      child: BlocBuilder<ConversionScreenBloc, ConversionScreenViewState>(
                         builder: (context, state) {
                           return GestureDetector(
                             onTap: state.showDecimal
-                                ? () => context
-                                    .read<ConversionScreenPresenter>()
-                                    .add(const ConversionScreenAction.inputTap())
+                                ? () => context.read<ConversionScreenBloc>().add(const ConversionScreenEvent.inputTap())
                                 : null,
                             child: ConversionInput(
                               currency: state.direction.input,
@@ -88,7 +85,7 @@ class _ConversionScreen extends HookWidget {
                       reverse: true,
                       child: Padding(
                         padding: const EdgeInsets.only(right: 12.0),
-                        child: BlocBuilder<ConversionScreenPresenter, ConversionScreenViewState>(
+                        child: BlocBuilder<ConversionScreenBloc, ConversionScreenViewState>(
                           builder: (context, state) {
                             return ConversionOutput(
                               currency: state.direction.output,
@@ -103,7 +100,7 @@ class _ConversionScreen extends HookWidget {
                 ],
               ),
             ),
-            BlocBuilder<ConversionScreenPresenter, ConversionScreenViewState>(builder: (context, state) {
+            BlocBuilder<ConversionScreenBloc, ConversionScreenViewState>(builder: (context, state) {
               return IgnorePointer(
                 ignoring: state.inputValue == 0,
                 child: AnimatedScale(
@@ -113,8 +110,7 @@ class _ConversionScreen extends HookWidget {
                   child: Padding(
                     padding: const EdgeInsets.only(bottom: 4.0),
                     child: KunerButton(
-                      onPressed: () =>
-                          context.read<ConversionScreenPresenter>().add(const ConversionScreenAction.reset()),
+                      onPressed: () => context.read<ConversionScreenBloc>().add(const ConversionScreenEvent.reset()),
                       padding: const EdgeInsets.all(8),
                       child: SvgPicture.asset(
                         Assets.svgs.reset,

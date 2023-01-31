@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
-part of 'conversion_screen_action.dart';
+part of 'conversion_screen_event.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -15,7 +15,7 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
-mixin _$ConversionScreenAction {
+mixin _$ConversionScreenEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() conversionTogglePressed,
@@ -70,20 +70,20 @@ mixin _$ConversionScreenAction {
 }
 
 /// @nodoc
-abstract class $ConversionScreenActionCopyWith<$Res> {
-  factory $ConversionScreenActionCopyWith(ConversionScreenAction value,
-          $Res Function(ConversionScreenAction) then) =
-      _$ConversionScreenActionCopyWithImpl<$Res>;
+abstract class $ConversionScreenEventCopyWith<$Res> {
+  factory $ConversionScreenEventCopyWith(ConversionScreenEvent value,
+          $Res Function(ConversionScreenEvent) then) =
+      _$ConversionScreenEventCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class _$ConversionScreenActionCopyWithImpl<$Res>
-    implements $ConversionScreenActionCopyWith<$Res> {
-  _$ConversionScreenActionCopyWithImpl(this._value, this._then);
+class _$ConversionScreenEventCopyWithImpl<$Res>
+    implements $ConversionScreenEventCopyWith<$Res> {
+  _$ConversionScreenEventCopyWithImpl(this._value, this._then);
 
-  final ConversionScreenAction _value;
+  final ConversionScreenEvent _value;
   // ignore: unused_field
-  final $Res Function(ConversionScreenAction) _then;
+  final $Res Function(ConversionScreenEvent) _then;
 }
 
 /// @nodoc
@@ -95,7 +95,7 @@ abstract class _$$ConversionTogglePressedCopyWith<$Res> {
 
 /// @nodoc
 class __$$ConversionTogglePressedCopyWithImpl<$Res>
-    extends _$ConversionScreenActionCopyWithImpl<$Res>
+    extends _$ConversionScreenEventCopyWithImpl<$Res>
     implements _$$ConversionTogglePressedCopyWith<$Res> {
   __$$ConversionTogglePressedCopyWithImpl(_$ConversionTogglePressed _value,
       $Res Function(_$ConversionTogglePressed) _then)
@@ -113,7 +113,7 @@ class _$ConversionTogglePressed implements ConversionTogglePressed {
 
   @override
   String toString() {
-    return 'ConversionScreenAction.conversionTogglePressed()';
+    return 'ConversionScreenEvent.conversionTogglePressed()';
   }
 
   @override
@@ -202,7 +202,7 @@ class _$ConversionTogglePressed implements ConversionTogglePressed {
   }
 }
 
-abstract class ConversionTogglePressed implements ConversionScreenAction {
+abstract class ConversionTogglePressed implements ConversionScreenEvent {
   const factory ConversionTogglePressed() = _$ConversionTogglePressed;
 }
 
@@ -216,7 +216,7 @@ abstract class _$$NewInputValueCopyWith<$Res> {
 
 /// @nodoc
 class __$$NewInputValueCopyWithImpl<$Res>
-    extends _$ConversionScreenActionCopyWithImpl<$Res>
+    extends _$ConversionScreenEventCopyWithImpl<$Res>
     implements _$$NewInputValueCopyWith<$Res> {
   __$$NewInputValueCopyWithImpl(
       _$NewInputValue _value, $Res Function(_$NewInputValue) _then)
@@ -248,7 +248,7 @@ class _$NewInputValue implements NewInputValue {
 
   @override
   String toString() {
-    return 'ConversionScreenAction.newInputValue(value: $value)';
+    return 'ConversionScreenEvent.newInputValue(value: $value)';
   }
 
   @override
@@ -344,7 +344,7 @@ class _$NewInputValue implements NewInputValue {
   }
 }
 
-abstract class NewInputValue implements ConversionScreenAction {
+abstract class NewInputValue implements ConversionScreenEvent {
   const factory NewInputValue(final double value) = _$NewInputValue;
 
   double get value;
@@ -362,7 +362,7 @@ abstract class _$$InputTapCopyWith<$Res> {
 
 /// @nodoc
 class __$$InputTapCopyWithImpl<$Res>
-    extends _$ConversionScreenActionCopyWithImpl<$Res>
+    extends _$ConversionScreenEventCopyWithImpl<$Res>
     implements _$$InputTapCopyWith<$Res> {
   __$$InputTapCopyWithImpl(_$InputTap _value, $Res Function(_$InputTap) _then)
       : super(_value, (v) => _then(v as _$InputTap));
@@ -378,7 +378,7 @@ class _$InputTap implements InputTap {
 
   @override
   String toString() {
-    return 'ConversionScreenAction.inputTap()';
+    return 'ConversionScreenEvent.inputTap()';
   }
 
   @override
@@ -466,7 +466,7 @@ class _$InputTap implements InputTap {
   }
 }
 
-abstract class InputTap implements ConversionScreenAction {
+abstract class InputTap implements ConversionScreenEvent {
   const factory InputTap() = _$InputTap;
 }
 
@@ -478,7 +478,7 @@ abstract class _$$ResetCopyWith<$Res> {
 
 /// @nodoc
 class __$$ResetCopyWithImpl<$Res>
-    extends _$ConversionScreenActionCopyWithImpl<$Res>
+    extends _$ConversionScreenEventCopyWithImpl<$Res>
     implements _$$ResetCopyWith<$Res> {
   __$$ResetCopyWithImpl(_$Reset _value, $Res Function(_$Reset) _then)
       : super(_value, (v) => _then(v as _$Reset));
@@ -494,7 +494,7 @@ class _$Reset implements Reset {
 
   @override
   String toString() {
-    return 'ConversionScreenAction.reset()';
+    return 'ConversionScreenEvent.reset()';
   }
 
   @override
@@ -582,6 +582,6 @@ class _$Reset implements Reset {
   }
 }
 
-abstract class Reset implements ConversionScreenAction {
+abstract class Reset implements ConversionScreenEvent {
   const factory Reset() = _$Reset;
 }

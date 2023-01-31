@@ -8,32 +8,30 @@ import 'package:kuner/device/interactors/conversion_interactor.dart';
 import 'package:kuner/device/managers/rotary_manager.dart';
 import 'package:kuner/device/models/conversion_state.dart';
 import 'package:kuner/device/models/settings_holder.dart';
-import 'package:kuner/ui/conversion/presenter/conversion_screen_action.dart';
+import 'package:kuner/ui/conversion/presenter/conversion_screen_event.dart';
 import 'package:kuner/ui/conversion/presenter/conversion_screen_view_state.dart';
 
 typedef ConversionScreenPresenterEmitter = Emitter<ConversionScreenViewState>;
 typedef State = ConversionScreenViewState;
-typedef Event = ConversionScreenAction;
+typedef Event = ConversionScreenEvent;
 
-class ConversionScreenPresenter extends Bloc<Event, State> {
-  ConversionScreenPresenter(
+class ConversionScreenBloc extends Bloc<Event, State> {
+  ConversionScreenBloc(
     this._conversionInteractor,
     SettingsHolder settingsHolder,
     RotaryManager rotaryManager,
   ) : super(_initialState(_conversionInteractor, settingsHolder)) {
-    on<ConversionScreenAction>((event, emit) async {
-      final completer = Completer<State>();
-
-      event.when(
-        conversionTogglePressed: () => _onConversionTogglePressed(completer),
-        newInputValue: (value) => _onNewInputValue(value, completer),
-        inputTap: () => _onInputValueTap(completer),
-        reset: () => _onReset(completer),
+    _subscription = rotaryManager.onRotaryInput.listen(_rotaryListener);
+    on<ConversionScreenEvent>((event, emit) async {
+      FutureOr<State> newState = event.when(
+        conversionTogglePressed: () => onConversionTogglePressed(),
+        newInputValue: (value) => onNewInputValue(value),
+        inputTap: () => onInputValueTap(),
+        reset: () => onReset(),
       );
 
-      emit(await completer.future);
+      emit(await newState);
     });
-    _subscription = rotaryManager.onRotaryInput.listen(_rotaryListener);
   }
 
   final ConversionInteractor _conversionInteractor;
@@ -51,10 +49,10 @@ class ConversionScreenPresenter extends Bloc<Event, State> {
   void _rotaryListener(RotaryEvent event) {
     switch (event.direction) {
       case RotaryDirection.clockwise:
-        add(ConversionScreenAction.newInputValue(state.inputValue + _getValueForSpeed(event.speed)));
+        add(ConversionScreenEvent.newInputValue(state.inputValue + _getValueForSpeed(event.speed)));
         break;
       case RotaryDirection.counterclockwise:
-        add(ConversionScreenAction.newInputValue(
+        add(ConversionScreenEvent.newInputValue(
           max(0, state.inputValue - _getValueForSpeed(event.speed)),
         ));
         break;
@@ -72,7 +70,7 @@ class ConversionScreenPresenter extends Bloc<Event, State> {
     }
   }
 
-  void _onConversionTogglePressed(Completer<State> completer) {
+  State onConversionTogglePressed() {
     final flipDirection = state.direction.other;
 
     final newState = state.copyWith(
@@ -84,10 +82,10 @@ class ConversionScreenPresenter extends Bloc<Event, State> {
 
     _saveToSharedPrefs(newState.toConversionState());
 
-    completer.complete(newState);
+    return newState;
   }
 
-  void _onNewInputValue(double value, Completer<State> completer) {
+  State onNewInputValue(double value) {
     final newState = state.copyWith(
       inputValue: value,
       convertedValue: _conversionInteractor.convert(value, direction: state.direction),
@@ -96,10 +94,10 @@ class ConversionScreenPresenter extends Bloc<Event, State> {
 
     _saveToSharedPrefs(newState.toConversionState());
 
-    completer.complete(newState);
+    return newState;
   }
 
-  void _onInputValueTap(Completer<State> completer) {
+  State onInputValueTap() {
     final newState = state.copyWith(
       inputValue: state.inputValue + 0.1,
       convertedValue: _conversionInteractor.convert(state.inputValue + 0.1, direction: state.direction),
@@ -108,10 +106,10 @@ class ConversionScreenPresenter extends Bloc<Event, State> {
 
     _saveToSharedPrefs(newState.toConversionState());
 
-    completer.complete(newState);
+    return newState;
   }
 
-  void _onReset(Completer<State> completer) {
+  State onReset() {
     final newState = state.copyWith(
       inputValue: 0,
       convertedValue: 0,
@@ -120,7 +118,7 @@ class ConversionScreenPresenter extends Bloc<Event, State> {
 
     _saveToSharedPrefs(newState.toConversionState());
 
-    completer.complete(newState);
+    return newState;
   }
 
   void _saveToSharedPrefs(ConversionState state) {
