@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:kuner/app/kuner_app.dart';
 import 'package:kuner/device/di/inject_dependency.dart' as device;
-import 'package:kuner/device/interactor/conversion/conversion_interactor.dart';
-import 'package:kuner/device/interactor/settings/setting_interactor.dart';
-import 'package:kuner/device/manager/shared_preferences.dart';
+import 'package:kuner/device/interactors/conversion_interactor.dart';
+import 'package:kuner/device/interactors/settings_interactor.dart';
+import 'package:kuner/device/managers/shared_preferences.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();

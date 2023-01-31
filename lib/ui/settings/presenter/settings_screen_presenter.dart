@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
-import 'package:kuner/device/interactor/settings/setting_interactor.dart';
+import 'package:kuner/device/interactors/settings_interactor.dart';
 import 'package:kuner/ui/settings/presenter/settings_screen_action.dart';
 import 'package:kuner/ui/settings/presenter/settings_screen_view_state.dart';
 

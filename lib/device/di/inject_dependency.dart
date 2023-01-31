@@ -1,20 +1,23 @@
 import 'package:get_it/get_it.dart';
-import 'package:kuner/device/interactor/conversion/conversion_interactor.dart';
-import 'package:kuner/device/interactor/conversion/conversion_interactor_impl.dart';
-import 'package:kuner/device/interactor/settings/setting_interactor.dart';
-import 'package:kuner/device/interactor/settings/settings_interactor_impl.dart';
-import 'package:kuner/device/manager/rotary_manager.dart';
-import 'package:kuner/device/manager/shared_preferences.dart';
+import 'package:kuner/device/interactors/conversion_interactor.dart';
+import 'package:kuner/device/interactors/settings_interactor.dart';
+import 'package:kuner/device/managers/conversion_manager.dart';
+import 'package:kuner/device/managers/rotary_manager.dart';
+import 'package:kuner/device/managers/shared_preferences.dart';
 import 'package:kuner/device/models/conversion_rate_holder.dart';
 import 'package:kuner/device/models/settings_holder.dart';
 
 void injectDependency(GetIt getIt) {
+  getIt.registerLazySingleton<ConversionManager>(
+    () => ConversionManagerImpl(getIt.get()),
+  );
+
   getIt.registerLazySingleton<RotaryManager>(
-    () => RotaryManager(),
+    () => RotaryManagerImpl(),
   );
 
   getIt.registerLazySingleton<SharedPreferences>(
-    () => SharedPreferences(),
+    () => SharedPreferencesImpl(),
   );
 
   getIt.registerLazySingleton<ConversionRateHolder>(
@@ -26,16 +29,10 @@ void injectDependency(GetIt getIt) {
   );
 
   getIt.registerFactory<SettingsInteractor>(
-    () => SettingsInteractorImpl(
-      getIt.get(),
-      getIt.get(),
-    ),
+    () => SettingsInteractorImpl(getIt.get(), getIt.get()),
   );
 
   getIt.registerFactory<ConversionInteractor>(
-    () => ConversionInteractorImpl(
-      getIt.get(),
-      getIt.get(),
-    ),
+    () => ConversionInteractorImpl(getIt.get(), getIt.get(), getIt.get()),
   );
 }

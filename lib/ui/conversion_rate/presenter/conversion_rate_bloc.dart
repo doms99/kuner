@@ -5,8 +5,8 @@ import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:kuner/app/constants.dart';
 import 'package:kuner/common/util/speed_calculator.dart';
-import 'package:kuner/device/interactor/conversion/conversion_interactor.dart';
-import 'package:kuner/device/manager/rotary_manager.dart';
+import 'package:kuner/device/interactors/conversion_interactor.dart';
+import 'package:kuner/device/managers/rotary_manager.dart';
 
 part 'conversion_rate_event.dart';
 part 'conversion_rate_state.dart';

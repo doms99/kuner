@@ -1,17 +1,31 @@
 import 'package:kuner/app/constants.dart';
-import 'package:kuner/device/interactor/conversion/conversion_interactor.dart';
-import 'package:kuner/device/manager/shared_preferences.dart';
+import 'package:kuner/device/managers/conversion_manager.dart';
+import 'package:kuner/device/managers/shared_preferences.dart';
 import 'package:kuner/device/models/conversion_rate_holder.dart';
 import 'package:kuner/device/models/conversion_state.dart';
 import 'package:kuner/ui/common/components/models/currency.dart';
 import 'package:kuner/ui/common/components/models/conversion_direction.dart';
 
+abstract class ConversionInteractor {
+  void init();
+
+  double convert(double value, {required ConversionDirection direction});
+
+  Future<bool> updateConversionRate(double newRate);
+  double getSavedConversionRate();
+
+  ConversionState getSavedState();
+  Future<void> saveState(ConversionState state);
+}
+
 class ConversionInteractorImpl implements ConversionInteractor {
   ConversionInteractorImpl(
+    this._conversionManager,
     this._conversionRateHolder,
     this._sharedPreferences,
   );
 
+  final ConversionManager _conversionManager;
   final ConversionRateHolder _conversionRateHolder;
   final SharedPreferences _sharedPreferences;
 
@@ -23,12 +37,7 @@ class ConversionInteractorImpl implements ConversionInteractor {
 
   @override
   double convert(double value, {required ConversionDirection direction}) {
-    switch (direction.input) {
-      case Currency.eur:
-        return value * _conversionRateHolder.conversionRate;
-      case Currency.hrk:
-        return value / _conversionRateHolder.conversionRate;
-    }
+    return _conversionManager.convert(value, direction: direction);
   }
 
   @override

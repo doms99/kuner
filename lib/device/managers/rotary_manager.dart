@@ -10,8 +10,12 @@ enum RotaryDirection {
   counterclockwise,
 }
 
-class RotaryManager {
-  RotaryManager() {
+abstract class RotaryManager {
+  Stream<RotaryEvent> get onRotaryInput;
+}
+
+class RotaryManagerImpl implements RotaryManager {
+  RotaryManagerImpl() {
     _eventChannel.receiveBroadcastStream({'vibrate': true}).listen((dynamic event) {
       if (event is! double) return;
 
@@ -42,6 +46,7 @@ class RotaryManager {
   final _speedCalculator = SpeedCalculator();
   final _streamController = StreamController<RotaryEvent>.broadcast();
 
+  @override
   Stream<RotaryEvent> get onRotaryInput => _streamController.stream;
 }
 
