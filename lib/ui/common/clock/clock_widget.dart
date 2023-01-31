@@ -13,7 +13,7 @@ class _ClockWidgetState extends State<ClockWidget> {
   late DateTime time;
   late final Timer timer;
 
-  String get _time => '${time.hour}:${time.minute}';
+  String get _time => '${time.hour.toString().padLeft(2, "0")}:${time.minute.toString().padLeft(2, "0")}';
 
   @override
   void initState() {
