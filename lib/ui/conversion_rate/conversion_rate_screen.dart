@@ -94,21 +94,27 @@ class _ConversionRateScreen extends StatelessWidget {
             ),
           ),
           BlocBuilder<ConversionRateBloc, ConversionRateState>(builder: (context, state) {
-            if (state.conversionRate != state.defaultConversionRate) {
-              return Padding(
-                padding: const EdgeInsets.only(bottom: 4.0),
-                child: KunerButton(
-                  onPressed: () => context.read<ConversionRateBloc>().add(const ConversionRateEvent.reset()),
-                  padding: const EdgeInsets.all(8),
-                  child: SvgPicture.asset(
-                    Assets.svgs.reset,
-                    color: Theme.of(context).colorScheme.onSecondary,
+            final isDefault = state.conversionRate == state.defaultConversionRate;
+            return IgnorePointer(
+              ignoring: isDefault,
+              child: AnimatedScale(
+                duration: const Duration(milliseconds: 100),
+                scale: isDefault ? 0 : 1,
+                curve: Curves.easeOut,
+                child: Padding(
+                  padding: const EdgeInsets.only(bottom: 4.0),
+                  child: KunerButton(
+                    onPressed: () => context.read<ConversionRateBloc>().add(const ConversionRateEvent.reset()),
+                    padding: const EdgeInsets.all(8),
+                    child: SvgPicture.asset(
+                      Assets.svgs.reset,
+                      color: Theme.of(context).colorScheme.onSecondary,
+                    ),
                   ),
                 ),
-              );
-            }
-
-            return const SizedBox(height: 34 + 4);
+              ),
+            );
+            // return const SizedBox(height: 34 + 4);
           }),
         ],
       ),
