@@ -16,7 +16,7 @@ class SettingsScreenBloc extends Bloc<Event, State> {
     on<SettingsScreenEvent>(
       (event, emit) async {
         FutureOr<State> newState = event.when(
-          toggle: () => onToggle(),
+          toggle: () => _onToggle(),
         );
 
         emit(await newState);
@@ -26,7 +26,7 @@ class SettingsScreenBloc extends Bloc<Event, State> {
 
   final SettingsInteractor _settingInteractor;
 
-  Future<State> onToggle() async {
+  Future<State> _onToggle() async {
     await _settingInteractor.updateSettings(
       _settingInteractor.settings.copyWith(showDecimal: !state.showDecimal),
     );

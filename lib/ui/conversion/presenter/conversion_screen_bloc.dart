@@ -24,10 +24,10 @@ class ConversionScreenBloc extends Bloc<Event, State> {
     _subscription = rotaryManager.onRotaryInput.listen(_rotaryListener);
     on<ConversionScreenEvent>((event, emit) async {
       FutureOr<State> newState = event.when(
-        conversionTogglePressed: () => onConversionTogglePressed(),
-        newInputValue: (value) => onNewInputValue(value),
-        inputTap: () => onInputValueTap(),
-        reset: () => onReset(),
+        conversionTogglePressed: () => _onConversionTogglePressed(),
+        newInputValue: (value) => _onNewInputValue(value),
+        inputTap: () => _onInputValueTap(),
+        reset: () => _onReset(),
       );
 
       emit(await newState);
@@ -70,7 +70,7 @@ class ConversionScreenBloc extends Bloc<Event, State> {
     }
   }
 
-  State onConversionTogglePressed() {
+  State _onConversionTogglePressed() {
     final flipDirection = state.direction.other;
 
     final newState = state.copyWith(
@@ -85,7 +85,7 @@ class ConversionScreenBloc extends Bloc<Event, State> {
     return newState;
   }
 
-  State onNewInputValue(double value) {
+  State _onNewInputValue(double value) {
     final newState = state.copyWith(
       inputValue: value,
       convertedValue: _conversionInteractor.convert(value, direction: state.direction),
@@ -97,7 +97,7 @@ class ConversionScreenBloc extends Bloc<Event, State> {
     return newState;
   }
 
-  State onInputValueTap() {
+  State _onInputValueTap() {
     final newState = state.copyWith(
       inputValue: state.inputValue + 0.1,
       convertedValue: _conversionInteractor.convert(state.inputValue + 0.1, direction: state.direction),
@@ -109,7 +109,7 @@ class ConversionScreenBloc extends Bloc<Event, State> {
     return newState;
   }
 
-  State onReset() {
+  State _onReset() {
     final newState = state.copyWith(
       inputValue: 0,
       convertedValue: 0,

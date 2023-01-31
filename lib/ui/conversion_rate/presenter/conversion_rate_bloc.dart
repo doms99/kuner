@@ -27,8 +27,8 @@ class ConversionRateBloc extends Bloc<ConversionRateEvent, ConversionRateState> 
     _subscription = rotaryManager.onRotaryInput.listen(_rotaryListener);
     on<ConversionRateEvent>((event, emit) async {
       FutureOr<State> newState = event.when(
-        updateValue: (value) => onUpdateValue(value),
-        reset: () => onUpdateValue(Constants.defaultConversionRate),
+        updateValue: (value) => _onUpdateValue(value),
+        reset: () => _onUpdateValue(Constants.defaultConversionRate),
       );
 
       emit(await newState);
@@ -62,7 +62,7 @@ class ConversionRateBloc extends Bloc<ConversionRateEvent, ConversionRateState> 
     }
   }
 
-  State onUpdateValue(double value) {
+  State _onUpdateValue(double value) {
     _conversionInteractor.updateConversionRate(value);
 
     return state.copyWith(conversionRate: value);

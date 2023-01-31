@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
-import 'package:kuner/ui/conversion/presenter/conversion_screen_presenter.dart';
+import 'package:kuner/ui/conversion/presenter/conversion_screen_bloc.dart';
 import 'package:kuner/ui/conversion_rate/presenter/conversion_rate_bloc.dart';
 
 class ConversionRateBlocWidget extends StatelessWidget {
