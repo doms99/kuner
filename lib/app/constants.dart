@@ -25,5 +25,4 @@ class API {
   API._();
 
   static const String baseURL = 'https://api.exchangeratesapi.io';
-  static String convert()
 }
