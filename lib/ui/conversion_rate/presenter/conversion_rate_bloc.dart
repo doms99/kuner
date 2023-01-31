@@ -60,6 +60,8 @@ class ConversionRateBloc extends Bloc<ConversionRateEvent, ConversionRateState> 
         return 0.00001;
       case Speed.fast:
         return 0.001;
+      case Speed.ludicrous:
+        return 0.1;
     }
   }
 

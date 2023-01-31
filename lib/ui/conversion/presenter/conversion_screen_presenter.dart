@@ -67,6 +67,8 @@ class ConversionScreenPresenter extends Bloc<Event, State> {
         return 1;
       case Speed.fast:
         return 10;
+      case Speed.ludicrous:
+        return 100;
     }
   }
 

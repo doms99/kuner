@@ -1,12 +1,15 @@
 enum Speed {
   slow,
-  fast;
+  fast,
+  ludicrous;
 
   double get milliseconds {
     switch (this) {
       case Speed.slow:
         return 125;
       case Speed.fast:
+        return 25;
+      case Speed.ludicrous:
         return 0;
     }
   }
@@ -22,8 +25,10 @@ class SpeedCalculator {
 
     if (timeFromLast / multiplier >= Speed.slow.milliseconds) {
       return Speed.slow;
-    } else {
+    } else if (timeFromLast / multiplier >= Speed.fast.milliseconds) {
       return Speed.fast;
+    } else {
+      return Speed.ludicrous;
     }
   }
 
