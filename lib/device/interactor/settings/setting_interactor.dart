@@ -1,4 +1,4 @@
-import 'package:kuner/device/model/settings.dart';
+import 'package:kuner/device/models/settings.dart';
 
 abstract class SettingsInteractor {
   Settings get settings;

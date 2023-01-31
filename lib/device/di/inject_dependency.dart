@@ -5,8 +5,8 @@ import 'package:kuner/device/interactor/settings/setting_interactor.dart';
 import 'package:kuner/device/interactor/settings/settings_interactor_impl.dart';
 import 'package:kuner/device/manager/rotary_manager.dart';
 import 'package:kuner/device/manager/shared_preferences.dart';
-import 'package:kuner/device/model/conversion_rate_holder.dart';
-import 'package:kuner/device/model/settings_holder.dart';
+import 'package:kuner/device/models/conversion_rate_holder.dart';
+import 'package:kuner/device/models/settings_holder.dart';
 
 void injectDependency(GetIt getIt) {
   getIt.registerLazySingleton<RotaryManager>(

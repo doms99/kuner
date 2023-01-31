@@ -1,4 +1,4 @@
-import 'package:kuner/device/model/conversion_state.dart';
+import 'package:kuner/device/models/conversion_state.dart';
 import 'package:kuner/ui/common/components/models/conversion_direction.dart';
 
 abstract class ConversionInteractor {

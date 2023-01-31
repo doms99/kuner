@@ -1,8 +1,8 @@
 import 'package:kuner/app/constants.dart';
 import 'package:kuner/device/interactor/conversion/conversion_interactor.dart';
 import 'package:kuner/device/manager/shared_preferences.dart';
-import 'package:kuner/device/model/conversion_rate_holder.dart';
-import 'package:kuner/device/model/conversion_state.dart';
+import 'package:kuner/device/models/conversion_rate_holder.dart';
+import 'package:kuner/device/models/conversion_state.dart';
 import 'package:kuner/ui/common/components/models/currency.dart';
 import 'package:kuner/ui/common/components/models/conversion_direction.dart';
 

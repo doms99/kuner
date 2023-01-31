@@ -6,8 +6,8 @@ import 'package:kuner/common/debouncer.dart';
 import 'package:kuner/common/util/speed_calculator.dart';
 import 'package:kuner/device/interactor/conversion/conversion_interactor.dart';
 import 'package:kuner/device/manager/rotary_manager.dart';
-import 'package:kuner/device/model/conversion_state.dart';
-import 'package:kuner/device/model/settings_holder.dart';
+import 'package:kuner/device/models/conversion_state.dart';
+import 'package:kuner/device/models/settings_holder.dart';
 import 'package:kuner/ui/conversion/presenter/conversion_screen_action.dart';
 import 'package:kuner/ui/conversion/presenter/conversion_screen_view_state.dart';
 
