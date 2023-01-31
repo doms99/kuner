@@ -58,12 +58,8 @@ class ConversionRateBloc extends Bloc<ConversionRateEvent, ConversionRateState> 
     switch (speed) {
       case Speed.slow:
         return 0.00001;
-      case Speed.medium:
-        return 0.0001;
       case Speed.fast:
         return 0.001;
-      case Speed.veryFast:
-        return 0.1;
     }
   }
 

@@ -65,12 +65,8 @@ class ConversionScreenPresenter extends Bloc<Event, State> {
     switch (speed) {
       case Speed.slow:
         return 1;
-      case Speed.medium:
-        return 5;
       case Speed.fast:
         return 10;
-      case Speed.veryFast:
-        return 100;
     }
   }
 

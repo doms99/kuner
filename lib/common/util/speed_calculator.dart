@@ -1,18 +1,12 @@
 enum Speed {
   slow,
-  medium,
-  fast,
-  veryFast;
+  fast;
 
   double get milliseconds {
     switch (this) {
       case Speed.slow:
-        return 200;
-      case Speed.medium:
-        return 100;
+        return 125;
       case Speed.fast:
-        return 25;
-      case Speed.veryFast:
         return 0;
     }
   }
@@ -28,12 +22,8 @@ class SpeedCalculator {
 
     if (timeFromLast / multiplier >= Speed.slow.milliseconds) {
       return Speed.slow;
-    } else if (timeFromLast / multiplier >= Speed.medium.milliseconds) {
-      return Speed.medium;
-    } else if (timeFromLast / multiplier >= Speed.fast.milliseconds) {
-      return Speed.fast;
     } else {
-      return Speed.veryFast;
+      return Speed.fast;
     }
   }
 
