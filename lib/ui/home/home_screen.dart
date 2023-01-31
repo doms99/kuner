@@ -1,23 +1,40 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:kuner/ui/conversion/conversion_screen.dart';
+import 'package:kuner/ui/home/bloc/home_screen_bloc.dart';
+import 'package:kuner/ui/home/bloc/home_screen_bloc_widget.dart';
 import 'package:kuner/ui/options/options_screen.dart';
 
-class HomeScreen extends StatefulWidget {
+class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
+  Widget build(BuildContext context) {
+    return const HomeScreenBlocWidget(
+      child: _HomeScreen(),
+    );
+  }
 }
 
-class _HomeScreenState extends State<HomeScreen> {
-  final _pageController = PageController();
+class _HomeScreen extends HookWidget {
+  const _HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
+    final pageController = usePageController();
+
+    useEffect(() {
+      pageController.addListener(() {
+        context.read<HomeScreenBloc>().add(HomeScreenEvent.pageChanged(pageController.page?.toInt() ?? 0));
+      });
+
+      return null;
+    }, []);
 
     return Stack(
       fit: StackFit.expand,
@@ -29,7 +46,7 @@ class _HomeScreenState extends State<HomeScreen> {
             return false;
           },
           child: PageView(
-            controller: _pageController,
+            controller: pageController,
             scrollDirection: Axis.vertical,
             scrollBehavior: const MaterialScrollBehavior(),
             children: const [
@@ -39,14 +56,14 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
         AnimatedBuilder(
-          animation: _pageController,
+          animation: pageController,
           builder: (context, _) {
             return Positioned(
               height: 24,
               width: 24,
-              bottom: (_pageController.page ?? 0) * (size.height - 24),
+              bottom: (pageController.page ?? 0) * (size.height - 24),
               child: IgnorePointer(
-                child: _Arrow(_pageController.page ?? 0),
+                child: _Arrow(pageController.page ?? 0),
               ),
             );
           },

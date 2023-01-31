@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
-import 'package:kuner/ui/settings/presenter/settings_screen_bloc.dart';
+import 'package:kuner/ui/settings/bloc/settings_screen_bloc.dart';
 
 class SettingsScreenBlocWidget extends StatelessWidget {
   const SettingsScreenBlocWidget({

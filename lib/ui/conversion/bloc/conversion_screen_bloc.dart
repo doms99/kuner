@@ -2,17 +2,20 @@ import 'dart:async';
 import 'dart:math';
 
 import 'package:bloc/bloc.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:kuner/common/debouncer.dart';
 import 'package:kuner/common/util/speed_calculator.dart';
 import 'package:kuner/device/interactors/conversion_interactor.dart';
 import 'package:kuner/device/managers/rotary_manager.dart';
 import 'package:kuner/device/models/conversion_state.dart';
 import 'package:kuner/device/models/settings_holder.dart';
-import 'package:kuner/ui/conversion/presenter/conversion_screen_event.dart';
-import 'package:kuner/ui/conversion/presenter/conversion_screen_view_state.dart';
+import 'package:kuner/ui/common/components/models/conversion_direction.dart';
 
-typedef ConversionScreenPresenterEmitter = Emitter<ConversionScreenViewState>;
-typedef State = ConversionScreenViewState;
+part 'conversion_screen_event.dart';
+part 'conversion_screen_state.dart';
+part 'conversion_screen_bloc.freezed.dart';
+
+typedef State = ConversionScreenState;
 typedef Event = ConversionScreenEvent;
 
 class ConversionScreenBloc extends Bloc<Event, State> {
@@ -28,6 +31,8 @@ class ConversionScreenBloc extends Bloc<Event, State> {
         newInputValue: (value) => _onNewInputValue(value),
         inputTap: () => _onInputValueTap(),
         reset: () => _onReset(),
+        disableRotary: () => _onListenerToggle(false),
+        enableRotary: () => _onListenerToggle(true),
       );
 
       emit(await newState);
@@ -119,6 +124,16 @@ class ConversionScreenBloc extends Bloc<Event, State> {
     _saveToSharedPrefs(newState.toConversionState());
 
     return newState;
+  }
+
+  State _onListenerToggle(bool enabled) {
+    if (enabled) {
+      _subscription.resume();
+    } else {
+      _subscription.pause();
+    }
+
+    return state.copyWith(rotaryEnabled: enabled);
   }
 
   void _saveToSharedPrefs(ConversionState state) {

@@ -9,16 +9,17 @@ class NewValueProps {
   NewValueProps(this.value, this.previous, this.animated);
 }
 
-class NumberFieldController extends ValueNotifier<NewValueProps> {
-  NumberFieldController({double initialValue = 0}) : super(NewValueProps(initialValue, initialValue, false));
+class NumberFieldController extends ChangeNotifier {
+  NumberFieldController({double initialValue = 0}) : _state = NewValueProps(initialValue, initialValue, false);
 
-  NewValueProps get state => value;
+  NewValueProps _state;
+  NewValueProps get state => _state;
 
   void setValue(double value, {bool animated = true}) {
-    super.value = NewValueProps(value, state.value, animated);
+    _state = NewValueProps(value, state.value, animated);
   }
 
   void reset() {
-    super.value = NewValueProps(0, state.value, true);
+    _state = NewValueProps(0, state.value, true);
   }
 }

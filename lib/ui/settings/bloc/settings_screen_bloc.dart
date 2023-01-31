@@ -2,8 +2,8 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:kuner/device/interactors/settings_interactor.dart';
-import 'package:kuner/ui/settings/presenter/settings_screen_event.dart';
-import 'package:kuner/ui/settings/presenter/settings_screen_view_state.dart';
+import 'package:kuner/ui/settings/bloc/settings_screen_event.dart';
+import 'package:kuner/ui/settings/bloc/settings_screen_view_state.dart';
 
 typedef SettingsEmitter = Emitter<SettingsScreenViewState>;
 typedef State = SettingsScreenViewState;

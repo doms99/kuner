@@ -1,10 +1,9 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:kuner/ui/common/components/kuner_toggle.dart';
 import 'package:kuner/ui/common/wear_os/wear_os_route.dart';
-import 'package:kuner/ui/settings/presenter/settings_screen_event.dart';
-import 'package:kuner/ui/settings/presenter/settings_screen_bloc.dart';
-import 'package:kuner/ui/settings/presenter/settings_screen_bloc_widget.dart';
+import 'package:kuner/ui/settings/bloc/settings_screen_event.dart';
+import 'package:kuner/ui/settings/bloc/settings_screen_bloc.dart';
+import 'package:kuner/ui/settings/bloc/settings_screen_bloc_widget.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SettingsScreen extends StatelessWidget {

@@ -59,8 +59,15 @@ class _AnimatedNumberFieldState extends State<AnimatedNumberField> with SingleTi
     _fieldController.addListener(_fieldControllerListener);
   }
 
+  @override
+  void dispose() {
+    _controller.dispose();
+    _fieldController.dispose();
+    super.dispose();
+  }
+
   void _fieldControllerListener() {
-    if (_fieldController.value.animated) {
+    if (_fieldController.state.animated) {
       _controller.reset();
       _controller.forward();
     } else {

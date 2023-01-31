@@ -1,24 +1,21 @@
-import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:kuner/device/models/conversion_state.dart';
-
-import 'package:kuner/ui/common/components/models/conversion_direction.dart';
-
-part 'conversion_screen_view_state.freezed.dart';
+part of 'conversion_screen_bloc.dart';
 
 @freezed
-class ConversionScreenViewState with _$ConversionScreenViewState {
-  const ConversionScreenViewState._();
+class ConversionScreenState with _$ConversionScreenState {
+  const ConversionScreenState._();
 
-  const factory ConversionScreenViewState({
+  const factory ConversionScreenState({
     required bool showDecimal,
     required ConversionDirection direction,
     required double inputValue,
     required double convertedValue,
     required bool animate,
+    required bool rotaryEnabled,
   }) = _ConversionScreenViewState;
 
-  factory ConversionScreenViewState.fromConversionState(ConversionState state, {required bool showDecimal}) {
-    return ConversionScreenViewState(
+  factory ConversionScreenState.fromConversionState(ConversionState state, {required bool showDecimal}) {
+    return ConversionScreenState(
+      rotaryEnabled: true,
       showDecimal: showDecimal,
       direction: state.conversionDirection,
       inputValue: state.inputValue,

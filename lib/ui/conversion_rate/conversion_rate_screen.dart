@@ -8,8 +8,8 @@ import 'package:kuner/ui/common/components/kuner_button.dart';
 import 'package:kuner/ui/common/components/models/currency.dart';
 import 'package:kuner/ui/common/theme/number_theme.dart';
 import 'package:kuner/ui/common/wear_os/wear_os_route.dart';
-import 'package:kuner/ui/conversion_rate/presenter/conversion_rate_bloc.dart';
-import 'package:kuner/ui/conversion_rate/presenter/conversion_rate_bloc_widget.dart';
+import 'package:kuner/ui/conversion_rate/bloc/conversion_rate_bloc.dart';
+import 'package:kuner/ui/conversion_rate/bloc/conversion_rate_bloc_widget.dart';
 
 import 'package:kuner/gen/assets.gen.dart';
 
