@@ -4,11 +4,16 @@ import 'package:kuner/device/interactors/settings_interactor.dart';
 import 'package:kuner/device/managers/ambient_manager.dart';
 import 'package:kuner/device/managers/conversion_manager.dart';
 import 'package:kuner/device/managers/rotary_manager.dart';
+import 'package:kuner/device/managers/shape_manager.dart';
 import 'package:kuner/device/managers/shared_preferences.dart';
 import 'package:kuner/device/models/conversion_rate_holder.dart';
 import 'package:kuner/device/models/settings_holder.dart';
 
 void injectDependency(GetIt getIt) {
+  getIt.registerLazySingleton<ShapeManager>(
+    () => ShapeManagerImpl(),
+  );
+
   getIt.registerLazySingleton<AmbientManager>(
     () => AmbientManagerImpl(),
   );

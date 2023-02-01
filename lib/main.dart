@@ -4,6 +4,7 @@ import 'package:kuner/app/kuner_app.dart';
 import 'package:kuner/device/di/inject_dependency.dart' as device;
 import 'package:kuner/device/interactors/conversion_interactor.dart';
 import 'package:kuner/device/interactors/settings_interactor.dart';
+import 'package:kuner/device/managers/shape_manager.dart';
 import 'package:kuner/device/managers/shared_preferences.dart';
 
 Future<void> main() async {
@@ -20,7 +21,10 @@ void injectDependencies() {
 }
 
 Future<void> initState() async {
-  await GetIt.I.get<SharedPreferences>().init();
+  await Future.wait([
+    GetIt.I.get<SharedPreferences>().init(),
+    GetIt.I.get<ShapeManager>().init(),
+  ]);
 
   GetIt.I.get<ConversionInteractor>().init();
   GetIt.I.get<SettingsInteractor>().init();
