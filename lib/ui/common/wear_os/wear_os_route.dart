@@ -9,6 +9,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/rendering.dart';
+import 'package:kuner/app/device_shape.dart';
+import 'package:kuner/device/managers/shape_manager.dart';
 
 const double _kBackGestureWidth = 20.0;
 const double _kMinFlingVelocity = 1.0; // Screen widths per second.
@@ -360,9 +362,17 @@ class WearOsPageRoute<T> extends PageRoute<T> with WearOsRouteTransitionMixin<T>
   final WidgetBuilder builder;
 
   Widget _clippedBuilder(BuildContext context) {
-    return ClipOval(
-      child: builder(context),
-    );
+    final shape = DeviceShape.of(context).shape;
+    switch (shape) {
+      case Shape.circle:
+        return ClipOval(
+          child: builder(context),
+        );
+      case Shape.rectangle:
+        return ClipRect(
+          child: builder(context),
+        );
+    }
   }
 
   @override

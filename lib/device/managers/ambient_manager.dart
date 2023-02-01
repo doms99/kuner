@@ -2,9 +2,6 @@ import 'dart:async';
 
 import 'package:flutter/services.dart';
 import 'package:kuner/app/constants.dart';
-import 'package:kuner/device/models/conversion_rate_holder.dart';
-import 'package:kuner/ui/common/components/models/conversion_direction.dart';
-import 'package:kuner/ui/common/components/models/currency.dart';
 import 'package:rxdart/subjects.dart';
 
 abstract class AmbientManager {

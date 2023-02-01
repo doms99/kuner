@@ -2,7 +2,9 @@ import 'dart:async';
 
 import 'package:flutter/cupertino.dart';
 import 'package:get_it/get_it.dart';
+import 'package:kuner/app/device_shape.dart';
 import 'package:kuner/device/managers/ambient_manager.dart';
+import 'package:kuner/device/managers/shape_manager.dart';
 import 'package:kuner/ui/ambient_screen/ambient_screen.dart';
 import 'package:kuner/ui/common/theme/theme.dart';
 import 'package:kuner/ui/common/wear_os/wear_os_app.dart';
@@ -16,6 +18,12 @@ class KunerApp extends StatelessWidget {
     return WearOsApp(
       title: 'Kuner',
       theme: KunerTheme.themeData,
+      builder: (context, child) {
+        return DeviceShape(
+          shape: GetIt.I.get<ShapeManager>().deviceShape,
+          child: child!,
+        );
+      },
       home: Builder(builder: (context) {
         return const ScrollConfiguration(
           behavior: CupertinoScrollBehavior(),
