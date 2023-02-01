@@ -2,50 +2,84 @@ package com.example.kuner
 
 import android.content.Context
 import android.os.Bundle
-import android.os.PersistableBundle
 import android.os.Vibrator
-import android.view.InputDevice
-import android.view.MotionEvent
-import android.view.View
-import androidx.core.view.MotionEventCompat
-import androidx.viewpager.widget.ViewPager
-import androidx.wear.widget.SwipeDismissFrameLayout
+import com.google.android.wearable.compat.WearableActivityController
 import io.flutter.embedding.android.FlutterActivity
 import io.flutter.embedding.engine.FlutterEngine
 import io.flutter.plugin.common.EventChannel
-import java.lang.Exception
+import io.flutter.plugin.common.MethodCall
+import io.flutter.plugin.common.MethodChannel
 
-class MainActivity: FlutterActivity() {
-  private val CHANNEL = "main-channel"
+enum class Shape {
+  circle,
+  rectangle
+}
+
+class MainActivity: FlutterActivity(), MethodChannel.MethodCallHandler {
+  companion object {
+    private val ROTARY_CHANNEL = "rotary-channel"
+    private val AMBIENT_CHANNEL = "ambient-channel"
+    private val METHOD_CHANNEL = "method-channel"
+    private val CONTROLLER_TAG = "controller-tag"
+  }
   private val vibrator get() = getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
   private val rootView get() = window.decorView.rootView
+  private val ambientCallback = AmbientCallback()
+  private lateinit var ambientController: WearableActivityController
 
   override fun configureFlutterEngine(flutterEngine: FlutterEngine) {
     val root = rootView
     print(root)
 
     super.configureFlutterEngine(flutterEngine)
-    EventChannel(flutterEngine.dartExecutor.binaryMessenger, CHANNEL)
-      .setStreamHandler(RotaryStreamHandler(this))
+    EventChannel(flutterEngine.dartExecutor.binaryMessenger, ROTARY_CHANNEL)
+      .setStreamHandler(RotaryStreamHandler(rootView, vibrator))
+    EventChannel(flutterEngine.dartExecutor.binaryMessenger, AMBIENT_CHANNEL)
+      .setStreamHandler(ambientCallback)
+    MethodChannel(flutterEngine.dartExecutor.binaryMessenger, METHOD_CHANNEL)
+      .setMethodCallHandler(this)
   }
 
-  private class RotaryStreamHandler(private val mainActivity: MainActivity): EventChannel.StreamHandler {
-    override fun onListen(arguments: Any?, events: EventChannel.EventSink?) {
-      mainActivity.rootView.setOnGenericMotionListener { _, event ->
-        if(event.isFromSource(InputDevice.SOURCE_ROTARY_ENCODER) && event.action == MotionEvent.ACTION_SCROLL) {
-          val delta = -event.getAxisValue(MotionEventCompat.AXIS_SCROLL)
-          events?.success(delta)
-        }
-        if(arguments is Map<*, *> && arguments["vibrate"] == true) {
-          mainActivity.vibrator.vibrate(10)
-        }
+  override fun onCreate(savedInstanceState: Bundle?) {
+    super.onCreate(savedInstanceState)
+    ambientController = WearableActivityController(CONTROLLER_TAG, this, ambientCallback)
+    ambientCallback.onCreate(ambientController.isAmbient)
+    ambientController.setAmbientEnabled()
+    ambientController.onCreate()
+  }
 
-        true
-      }
-    }
+  override fun onResume() {
+    super.onResume()
+    ambientController.onResume()
+  }
 
-    override fun onCancel(arguments: Any?) {
-      mainActivity.rootView.setOnGenericMotionListener(null)
+  override fun onPause() {
+    super.onPause()
+    ambientController.onPause()
+  }
+
+  override fun onStop() {
+    super.onStop()
+    ambientController.onStop()
+  }
+
+  override fun onDestroy() {
+    super.onDestroy()
+    ambientController.onDestroy()
+  }
+
+  override fun onMethodCall(call: MethodCall, result: MethodChannel.Result) {
+    when(call.method) {
+      "getDeviceShape" -> result.success(getShape().toString())
     }
   }
+
+  private fun getShape(): Shape {
+    return if(activity.resources.configuration.isScreenRound) {
+      Shape.circle
+    } else {
+      Shape.rectangle
+    }
+  }
+
 }
