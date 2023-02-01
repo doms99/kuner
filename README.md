@@ -1,16 +1,3 @@
-# kuner
+# Kuner
 
-A new Flutter project.
-
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Kuner is a Flutter WearOS app for convertion from HRK to EUR and the other way around. A hoby project of mine to help me adjust to Croatia moving from kuna tu euro as it's currency.
