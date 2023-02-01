@@ -1,9 +1,9 @@
-import 'package:flutter/gestures.dart';
-
 class Constants {
   Constants._();
 
-  static const rotaryChannelId = 'main-channel';
+  static const rotaryChannelId = 'rotary-channel';
+  static const ambientChannelId = 'ambient-channel';
+  static const methodChannelId = 'method-channel';
 
   static const defaultConversionRate = 7.5345;
   static const defaultSettingsDecimal = true;

@@ -1,6 +1,7 @@
 import 'package:get_it/get_it.dart';
 import 'package:kuner/device/interactors/conversion_interactor.dart';
 import 'package:kuner/device/interactors/settings_interactor.dart';
+import 'package:kuner/device/managers/ambient_manager.dart';
 import 'package:kuner/device/managers/conversion_manager.dart';
 import 'package:kuner/device/managers/rotary_manager.dart';
 import 'package:kuner/device/managers/shared_preferences.dart';
@@ -8,6 +9,10 @@ import 'package:kuner/device/models/conversion_rate_holder.dart';
 import 'package:kuner/device/models/settings_holder.dart';
 
 void injectDependency(GetIt getIt) {
+  getIt.registerLazySingleton<AmbientManager>(
+    () => AmbientManagerImpl(),
+  );
+
   getIt.registerLazySingleton<ConversionManager>(
     () => ConversionManagerImpl(getIt.get()),
   );
