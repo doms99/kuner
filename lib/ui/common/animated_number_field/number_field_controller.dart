@@ -17,9 +17,11 @@ class NumberFieldController extends ChangeNotifier {
 
   void setValue(double value, {bool animated = true}) {
     _state = NewValueProps(value, state.value, animated);
+    notifyListeners();
   }
 
   void reset() {
     _state = NewValueProps(0, state.value, true);
+    notifyListeners();
   }
 }
