@@ -9,16 +9,22 @@ class AmbientCallback : WearableActivityController.AmbientCallback(), EventChann
   private var events: EventChannel.EventSink? = null
   private var isInitialAmbient: Boolean? = null
 
+  enum class Event {
+    enter,
+    exit,
+    update
+  }
+
   override fun onEnterAmbient(ambientDetails: Bundle?) {
-    events?.success(true)
+    events?.success(Event.enter)
   }
 
   override fun onExitAmbient() {
-    events?.success(false)
+    events?.success(Event.exit)
   }
 
   override fun onUpdateAmbient() {
-    // Update the content
+    events?.success(Event.update)
   }
 
   override fun onListen(arguments: Any?, events: EventChannel.EventSink?) {
