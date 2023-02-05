@@ -5,20 +5,49 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "kuner",
+      "name": "(debug dev) kuner",
       "request": "launch",
+      "program": "lib/main_dev.dart",
+      "args": ["--flavor", "dev"],
       "type": "dart"
     },
     {
-      "name": "kuner (profile mode)",
+      "name": "(profile dev) kuner",
       "request": "launch",
       "type": "dart",
+      "program": "lib/main_dev.dart",
+      "args": ["--flavor", "dev"],
       "flutterMode": "profile"
     },
     {
-      "name": "kuner (release mode)",
+      "name": "(release dev) kuner",
       "request": "launch",
       "type": "dart",
+      "program": "lib/main_dev.dart",
+      "args": ["--flavor", "dev"],
+      "flutterMode": "release"
+    },
+    {
+      "name": "(debug production) kuner",
+      "request": "launch",
+      "program": "lib/main_prod.dart",
+      "args": ["--flavor", "production"],
+      "type": "dart"
+    },
+    {
+      "name": "(profile production) kuner",
+      "request": "launch",
+      "type": "dart",
+      "program": "lib/main_prod.dart",
+      "args": ["--flavor", "production"],
+      "flutterMode": "profile"
+    },
+    {
+      "name": "(release production) kuner",
+      "request": "launch",
+      "type": "dart",
+      "program": "lib/main_prod.dart",
+      "args": ["--flavor", "production"],
       "flutterMode": "release"
     }
   ]

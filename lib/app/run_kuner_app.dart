@@ -7,7 +7,7 @@ import 'package:kuner/device/interactors/settings_interactor.dart';
 import 'package:kuner/device/managers/shape_manager.dart';
 import 'package:kuner/device/managers/shared_preferences.dart';
 
-Future<void> main() async {
+Future<void> runKunerApp() async {
   WidgetsFlutterBinding.ensureInitialized();
   injectDependencies();
 
