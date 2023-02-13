@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:kuner/ui/common/clock/ambient_clock_widget.dart';
 import 'package:kuner/ui/common/clock/clock_widget.dart';
 
 class AmbientScreen extends StatelessWidget {
@@ -10,7 +11,7 @@ class AmbientScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return const Scaffold(
       body: Center(
-        child: ClockWidget(large: true),
+        child: AmbientClockWidget(),
       ),
     );
   }
