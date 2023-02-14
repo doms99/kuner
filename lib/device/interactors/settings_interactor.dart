@@ -1,7 +1,7 @@
 import 'package:kuner/app/constants.dart';
 import 'package:kuner/device/managers/shared_preferences.dart';
-import 'package:kuner/device/models/settings.dart';
-import 'package:kuner/device/models/settings_holder.dart';
+import 'package:kuner/device/models/settings/settings.dart';
+import 'package:kuner/device/models/settings/settings_holder.dart';
 
 abstract class SettingsInteractor {
   Settings get settings;

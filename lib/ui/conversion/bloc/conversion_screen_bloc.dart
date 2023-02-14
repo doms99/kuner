@@ -8,7 +8,7 @@ import 'package:kuner/common/util/speed_calculator.dart';
 import 'package:kuner/device/interactors/conversion_interactor.dart';
 import 'package:kuner/device/managers/rotary_manager.dart';
 import 'package:kuner/device/models/conversion_state.dart';
-import 'package:kuner/device/models/settings_holder.dart';
+import 'package:kuner/device/models/settings/settings_holder.dart';
 import 'package:kuner/ui/common/components/models/conversion_direction.dart';
 
 part 'conversion_screen_event.dart';

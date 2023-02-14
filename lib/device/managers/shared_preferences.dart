@@ -4,6 +4,7 @@ import 'package:shared_preferences/shared_preferences.dart' as sp;
 
 abstract class SharedPreferences {
   Future<void> init();
+  Future<bool> remove(String key);
   Future<bool> setString(String key, String value);
   String? getString(String key);
   Future<bool> setDouble(String key, double value);
@@ -18,6 +19,11 @@ class SharedPreferencesImpl implements SharedPreferences {
   @override
   Future<void> init() async {
     _sharedPreferences = await sp.SharedPreferences.getInstance();
+  }
+
+  @override
+  Future<bool> remove(String key) {
+    return _sharedPreferences.remove(key);
   }
 
   @override

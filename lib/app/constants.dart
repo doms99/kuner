@@ -25,6 +25,16 @@ class API {
   API._();
 
   static const String baseURL = 'https://api.exchangeratesapi.io';
-  static String rate({required String from, required String to}) => '$baseURL/convert?from=$from&to=$to&amount=1';
-  static String get symbols => '$baseURL/symbols';
+  static const String _rate = '/convert';
+  static String rate({required String from, required String to}) => '/convert?from=$from&to=$to&amount=1';
+  static String get symbols => '/symbols';
+
+  static bool shouldCache(Uri uri) {
+    switch (uri.path) {
+      case _rate:
+        return true;
+      default:
+        return false;
+    }
+  }
 }
