@@ -25,4 +25,6 @@ class API {
   API._();
 
   static const String baseURL = 'https://api.exchangeratesapi.io';
+  static String rate({required String from, required String to}) => '$baseURL/convert?from=$from&to=$to&amount=1';
+  static String get symbols => '$baseURL/symbols';
 }
